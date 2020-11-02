@@ -11,7 +11,7 @@ var colorScale = d3.scaleThreshold()
 				.range([cs(0), cs(.55), cs(.7), cs(.9), cs(1.2)])
 //Using the d3.queue.js library
 d3.queue()
-	.defer(d3.json, "../../data/json/boston_region_mpo_towns.topo.json")
+	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
 	.defer(d3.json, "../../data/json/CMP_2014_ART_ROUTES.topojson")
 	.defer(d3.csv, "../../data/csv/arterial_route_id_table.csv")
 	.awaitAll(function(error, results){ 
