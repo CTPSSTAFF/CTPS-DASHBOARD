@@ -14,8 +14,8 @@ var geoPath = d3.geoPath().projection(projection);
 
 //Using the d3.queue.js library
 d3.queue()
-	.defer(d3.json, "../../data/json/boston_region_mpo_towns.topo.json")
-	.defer(d3.csv, "../../data/csv/nonmotorized_crashes.csv")
+	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
+	.defer(d3.csv, "../../data/csv/nonmotorized_crashes_97towns.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateMap(results[0],results[1]);
 		CTPS.demoApp.generatePlot(results[1]);
@@ -38,7 +38,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 	  .attr('class', 'd3-tip')
 	  .offset([-10, 0])
 	  .html(function(d) {
-		var town = d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		var town = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	    return "<p>" + town + "</p><b>2014 Statistics</b><br>Bike Injuries: " + findIndex(town, "bike_inj") + "<br>Bike Fatalities: " + findIndex(town, "bike_fat") + 
 	    "<br>Pedestrian Injuries: " + findIndex(town, "ped_inj") + "<br>Pedestrian Fatalities: " + findIndex(town, "ped_fat") + "<br><br> Total Bicycle Crashes: " + 
 	    findIndex(town, "bike_tot") + "<br> Total Pedestrian Crashes: " + findIndex(town, "ped_tot");
@@ -63,10 +63,10 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 		.data(topojson.feature(mpoTowns, mpoTowns.objects.boston_region_mpo_towns).features)
 		.enter()
 		.append("path")
-			.attr("class", function(d){ return d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
+			.attr("class", function(d){ return d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", function(d){
-				var capTown = d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}); 
+				var capTown = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}); 
 				var total = +findIndex(capTown, "bike_tot") + +findIndex(capTown, "ped_tot");
 				return colorScale(total); 	
 			})
