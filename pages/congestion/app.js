@@ -1,32 +1,35 @@
-//Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
+// JS code for congestion visualization for express highways.
+// Code written by Beatrice Jin, 2016.
+// Contact: beatricezjin@gmail.com
+// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
+// Contact: bkrepp@ctps.org
+//
+
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
 var e = d3.format(".1f");
 
 //Define Color Scale
-var cs = d3.scaleLinear().domain([.5, 1, 1.25]).range(["#D73027", "#fee08b", "#00B26F"]);	
+var cs = d3.scaleLinear().domain([.5, 1, 1.25]).range(["#D73027", "#fee08b", "#00B26F"]);
 var colorScale = d3.scaleThreshold()
 				.domain([.4, .5, .7, .9])
 				.range([cs(0), cs(.55), cs(.7), cs(.9), cs(1.2)])
-/*var colorScale = d3.scaleThreshold()
-				.domain([.4, .5, .7, .9])
-				.range(["#D73027", "#EB8859", "#fee08b", "#7FCF7D", "#00B26F"]);*/
 
 //Using the d3.queue.js library
 d3.queue()
-	.defer(d3.json, "../../data/json/boston_region_mpo_towns.topo.json")
-	.defer(d3.json, "../../data/json/CMP_2014_EXP_ROUTES.topojson")
-	.awaitAll(function(error, results){ 
+	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
+    .defer(d3.json, "../../data/json/cmp_2015_exp_routes_ext.geo.json")
+	.awaitAll(function(error, results){
 		CTPS.demoApp.generateMap(results[0],results[1]);
 		CTPS.demoApp.generateChart(results[1]);
 		//CTPS.demoApp.generateTimes(results[1]);
 		//CTPS.demoApp.generateTraveller(results[0], results[1]);
-	}); 
+	});
 	//CTPS.demoApp.generateViz);
 
 ////////////////* GENERATE MAP *////////////////////
-CTPS.demoApp.generateMap = function(cities, congestion) {	
+CTPS.demoApp.generateMap = function(cities, congestion) {
 	// Show name of MAPC Sub Region
 	// Define Zoom Behavior
 	var projection = d3.geoConicConformal()
@@ -34,15 +37,16 @@ CTPS.demoApp.generateMap = function(cities, congestion) {
     .rotate([71 + 30 / 60, -41 ])
 	.scale([28000]) // N.B. The scale and translation vector were determined empirically.
 	.translate([120, 1130]);
-	
+
 	var geoPath = d3.geoPath().projection(projection);
 
-	var maxmin = []; 
+	var maxmin = [];
 
-	var interstateRoads = topojson.feature(congestion, congestion.objects.CMP_2014_EXP_ROUTES_MPO_ONLY).features;
+	// var interstateRoads = topojson.feature(congestion, congestion.objects.CMP_2014_EXP_ROUTES_MPO_ONLY).features;
+    var interstateRoads = congestion.features;
 
-	interstateRoads.forEach(function(i) { 
-		maxmin.push(i.properties.AM_SPD_IX);
+	interstateRoads.forEach(function(i) {
+		maxmin.push(i.properties.am_spd_ix);
 	})
 
 	// SVG Viewport
@@ -54,10 +58,10 @@ CTPS.demoApp.generateMap = function(cities, congestion) {
 	  .attr('class', 'd3-tip')
 	  .offset([0, 10])
 	  .html(function(d) {
-	    return d.properties.ROUTE_NUM + "<br>Speed Limit: " + d.properties.SPD_LIMIT + "<br>Speed Index: " + d.properties.AM_SPD_IX;
+	    return d.properties.route_num + "<br>Speed Limit: " + d.properties.spd_limit + "<br>Speed Index: " + d.properties.am_spd_ix;
 	  })
 
-	svgContainer.call(tip); 
+	svgContainer.call(tip);
 
 	// Create Boston Region MPO map with SVG paths for individual towns.
 	var mapcSVG = svgContainer.selectAll(".subregion")
@@ -65,7 +69,7 @@ CTPS.demoApp.generateMap = function(cities, congestion) {
 		.enter()
 		.append("path")
 			.attr("class", "subregion")
-			.attr("id", function(d, i) { return d.properties.BORDER_LINK_ID; })
+			.attr("id", function(d, i) { return d.properties.border_link_id; })
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", "#ddd")
 			.style("stroke", "#191b1d")
@@ -79,12 +83,12 @@ CTPS.demoApp.generateMap = function(cities, congestion) {
 			.attr("class", function(d) { return "interstate mapsegment" + d.id;})
 			.attr("d", function(d, i) { return geoPath(d); })
 			.style("fill", "#ddd")
-			.style("stroke-width", function(d) { return (1/d.properties.AM_SPD_IX*5); })
+			.style("stroke-width", function(d) { return (1/d.properties.am_spd_ix*5); })
 			.style("stroke-linejoin", "round")
-			.style("stroke", function(d) { 
-				return colorScale(d.properties.AM_SPD_IX);
+			.style("stroke", function(d) {
+				return colorScale(d.properties.am_spd_ix);
 			})
-			.style("opacity", .2)//function(d) { return (d.properties.AM_SPD_IX-.5);})
+			.style("opacity", .2)//function(d) { return (d.properties.am_spd_ix-.5);})
 		.on("mouseenter", function(d) {
             	tip.show(d);
             })
@@ -94,10 +98,12 @@ CTPS.demoApp.generateMap = function(cities, congestion) {
 } // CTPS.demoApp.generateViz()
 
 
-CTPS.demoApp.generateChart = function(congestion) {	
+CTPS.demoApp.generateChart = function(congestion) {
 //Create chart comparing interstate roads by coordinates
-	//Create AM chart
-	var interstateRoads = topojson.feature(congestion, congestion.objects.CMP_2014_EXP_ROUTES_MPO_ONLY).features;
+	// Create AM chart
+	// var interstateRoads = topojson.feature(congestion, congestion.objects.CMP_2014_EXP_ROUTES_MPO_ONLY).features;
+    // *** NOTE: In spite of the variable's name "interstateRoads" really is an array of interstate road SEGMENTS (i.e., TMC's)
+    var interstateRoads = congestion.features;
 
 	var twoCharts = d3.select("#speedindex").append("svg")
 		.attr("id", "twoCharts")
@@ -117,40 +123,40 @@ CTPS.demoApp.generateChart = function(congestion) {
 		.attr("y", "45px")
 		.html("AM Speed Index");
 
-	//mouseover function	
+	//mouseover function
 	var tip2 = d3.tip()
 	  .attr('class', 'd3-tip')
 	  .attr("background", "black")
 	  .attr("color", "white")
 	  .offset([-10, 0])
 	  .html(function(d) {
-	    return d.properties.SEG_BEGIN + " <br>to " + d.properties.SEG_END + "<br> AM/PM Speed Index: <br><b>" + f(d.properties.AM_SPD_IX) + " / " + f(d.properties.PM_SPD_IX) + "</b>";
+	    return d.properties.seg_begin + " <br>to " + d.properties.seg_end + "<br> AM/PM Speed Index: <br><b>" + f(d.properties.am_spd_ix) + " / " + f(d.properties.pm_spd_ix) + "</b>";
 	  })
 	  .style("line-height", 1.4)
 
-	amchartContainer.call(tip2); 
-	
+	amchartContainer.call(tip2);
+
 
 	var nested_directions = d3.nest()
 	.key(function(d) {
-		var directionKey = ""; 
-		if (d.properties.DIRECTION == "Northbound") { directionKey = "NB"};
-		if (d.properties.DIRECTION == "Eastbound") { directionKey = "EB"};
-		if (d.properties.DIRECTION == "Westbound") { directionKey = "WB"};
-		if (d.properties.DIRECTION == "Southbound") { directionKey = "SB"};
-		return d.properties.ROUTE_NUM + " " + directionKey;})
+		var directionKey = "";
+		if (d.properties.direction == "Northbound") { directionKey = "NB"};
+		if (d.properties.direction == "Eastbound") { directionKey = "EB"};
+		if (d.properties.direction == "Westbound") { directionKey = "WB"};
+		if (d.properties.direction == "Southbound") { directionKey = "SB"};
+		return d.properties.route_num + " " + directionKey;})
 	.entries(interstateRoads)
 
-	var routes = []; 
+	var routes = [];
 	var maxmins = [];
 
-	interstateRoads.forEach(function(i){ 
-		routes.push(i.properties.ROUTE_NUM)
-		maxmins.push(i.properties.TO_MEAS)
+	interstateRoads.forEach(function(i){
+		routes.push(i.properties.route_num)
+		maxmins.push(i.properties.to_meas)
 	})
-	routes.sort(); 
+	routes.sort();
 	var routesByTotal = ["I-95", "I-495", "I-93", "I-90", "MA-3", "MA-2", "MA-128", "US-1", "MA-24", "US-3", "I-290"];
-	//Assign scales and axes 
+	//Assign scales and axes
 	xScaleRoad = d3.scaleLinear().domain([d3.max(maxmins), 0]).range([5, 300]);
 	xScaleSegment = d3.scaleLinear().domain([0, d3.max(maxmins)]).range([0, 295]);
 	yScale = d3.scalePoint().domain(routesByTotal).range([90, 520]);
@@ -162,47 +168,69 @@ CTPS.demoApp.generateChart = function(congestion) {
 		.attr("transform", "translate(0, 540)").style("stroke-width", "1px")
 		.style("font-size", "10px")
 		.call(xAxis);
-	
+
 	amchartContainer.append("g").attr("class", "yaxis")
 		.attr("transform", "translate(40, 0)")
 		.style("font-size", "10px")
-		.call(yAxis).selectAll("text").remove(); 
+		.call(yAxis).selectAll("text").remove();
 
-	function amfindFlipFrom(d) { 
-		var fromstorage = []; 
-		interstateRoads.forEach(function(j){ 
-			if (j.properties.ROUTE_NUM == d.properties.ROUTE_NUM && j.properties.DIRECTION == d.properties.DIRECTION) { 
-				fromstorage.push(j.properties.FROM_MEAS); 
-			}
-		})
-		var frommax = d3.max(fromstorage);
+    // Begin code added by BK, 10/22/19
+    var logicalRoutes = [ { rte : "I-95",   dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-95",   dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-495",  dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-495",  dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-93",   dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-93",   dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-90",   dir : "Eastbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-90",   dir : "Westbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-3",   dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-3",   dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-2",   dir : "Eastbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-2",   dir : "Westbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-128", dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-128", dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "US-1",   dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "US-1",   dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-24",  dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "MA-24",  dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "US-3",   dir : "Northbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "US-3",   dir : "Southbound", frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-290",  dir : "Eastbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  },
+                          { rte : "I-290",  dir : "Westbound",  frommax : 0, tomax : 0, frommax_minus_tomax : 0  }
+    ];
 
-		var tostorage = []; 
-		interstateRoads.forEach(function(j){ 
-			if (j.properties.ROUTE_NUM == d.properties.ROUTE_NUM && j.properties.DIRECTION == d.properties.DIRECTION) { 
-				tostorage.push(j.properties.TO_MEAS); 
-			}
-		})
+    // For each logical route, find its MAX from_meas, MAX to_meas, and the difference between the former and the latter
+    logicalRoutes.forEach(function(logicalRte) {
+        var logicalRte_segs = _.filter(interstateRoads, function(ir) {
+            var rv = (logicalRte.rte == ir.properties.route_num && logicalRte.dir == ir.properties.direction);
+            return rv;
+        });
+        // Using local vars during dev/debug
+        var frommax_seg = _.max(logicalRte_segs, function(seg){ return seg.properties.from_meas; });
+        var frommax = frommax_seg.properties.from_meas;
+        var tomax_seg = _.max(logicalRte_segs, function(seg){ return seg.properties.to_meas; });
+        var tomax = tomax_seg.properties.to_meas;
+        var frommax_minus_tomax = frommax - tomax;
+        logicalRte.frommax = frommax;
+        logicalRte.tomax = tomax;
+        logicalRte.frommax_minus_tomax = frommax_minus_tomax;
+    });
+    // HERE: End code added by BK 10/22/19
+    
+	function amfindFlipFrom(d) {
+		var allFromMeas = interstateRoads.filter(j => j.properties.route_num == d.properties.route_num && j.properties.direction == d.properties.direction).map(a => a.properties.from_meas)
+		var allToMeas = interstateRoads.filter(j => j.properties.route_num == d.properties.route_num && j.properties.direction == d.properties.direction).map(a => a.properties.to_meas)
 
-		var tomax = d3.max(tostorage);
+		var frommax = d3.max(allFromMeas);
+		var tomax = d3.max(allToMeas);
 
-		var returnarray = [];
-		returnarray.push(frommax); 
-		returnarray.push(tomax - frommax);
-
-		return returnarray;
+		return [frommax, tomax - frommax];
 	}
 
-	//Normalize ROUTEFROM for display (flip westbounds and southbounds to match eastbound and north bound)
-	interstateRoads.forEach(function(i){ 
-		if ((i.properties.DIRECTION == "Westbound" || i.properties.DIRECTION == "Southbound")) { 
-			i.properties.NORMALIZEDSTART = -(i.properties.FROM_MEAS - amfindFlipFrom(i)[0]) + amfindFlipFrom(i)[1];
-		} else if (i.properties.ROUTE_NUM == "MA-2" && i.properties.DIRECTION == "Eastbound") {
-			i.properties.NORMALIZEDSTART = i.properties.TO_MEAS - 5751.4697;
-		} else {
-			i.properties.NORMALIZEDSTART = i.properties.TO_MEAS;
-		}
-	}); 
+	//Normalize ROUTEFROM for display
+	interstateRoads.forEach( i => {
+			i.properties.normalizedstart = -(i.properties.from_meas - amfindFlipFrom(i)[1]) + amfindFlipFrom(i)[0];
+	});
 
 	amchartContainer.selectAll(".ambars")
 		.data(interstateRoads)
@@ -211,37 +239,39 @@ CTPS.demoApp.generateChart = function(congestion) {
 			.attr("class", function(d) { return "segment" + d.id + " ambars";})
 			.attr("height", 15)
 			.attr("width", function(d) {
-				if (isNaN(parseInt(d.properties.TO_MEAS))) { 
+				if (isNaN(parseInt(d.properties.to_meas))) {
 					return 0;
-				} else { 
-					return xScaleSegment(Math.abs(d.properties.TO_MEAS-d.properties.FROM_MEAS)); 
-				}})
-			.attr("x", function(d) { 
-				if (isNaN(parseInt(d.properties.FROM_MEAS))) { 
-					return -50;
-				} else { 
-					return xScaleRoad(d.properties.NORMALIZEDSTART)};
-				})
-			.attr("y", function(d) { 
-				if (d.properties.DIRECTION == "Eastbound" || d.properties.DIRECTION == "Northbound") { 
-					return yScale(d.properties.ROUTE_NUM) - 2 ;
 				} else {
-					return yScale(d.properties.ROUTE_NUM) - 20;
+					return xScaleSegment(Math.abs(d.properties.to_meas-d.properties.from_meas));
+				}})
+			.attr("x", function(d) {
+				if (isNaN(parseInt(d.properties.from_meas))) {
+					return -50;
+				} else {
+                    var retval = xScaleRoad(d.properties.normalizedstart);
+					return retval;
+                };
+			})
+			.attr("y", function(d) {
+				if (d.properties.direction == "Westbound" || d.properties.direction == "Northbound") {
+					return yScale(d.properties.route_num) - 20 ;
+				} else {
+					return yScale(d.properties.route_num) - 2;
 
 				}
 			})
 			.style("stroke", "none")
-			.style("fill", function(d) { 
-					if (!isNaN(d.properties.AM_SPD_IX)){
-						return colorScale(d.properties.AM_SPD_IX);
-					} else { 
-						return "#191b1d"; 
+			.style("fill", function(d) {
+					if (!isNaN(d.properties.am_spd_ix)){
+						return colorScale(d.properties.am_spd_ix);
+					} else {
+						return "#191b1d";
 					}
 				})
-			.on("mouseenter", function (d) { 
+			.on("mouseenter", function (d) {
 				var mystring = this.getAttribute("class");
 				var arr = mystring.split(" ", 2);
-				var firstWord = arr[0]; 
+				var firstWord = arr[0];
 
 				d3.selectAll("." + firstWord).transition()
 					.style("stroke", "#ddd")
@@ -251,14 +281,14 @@ CTPS.demoApp.generateChart = function(congestion) {
 
 				d3.selectAll(".map" + firstWord)
 					.style("opacity", 1)
-					.style("stroke-width", function(d) { return (4/d.properties.AM_SPD_IX*5); })
+					.style("stroke-width", function(d) { return (4/d.properties.am_spd_ix*5); })
 
-				tip2.show(d); 
+				tip2.show(d);
 			})
 			.on("mouseleave", function (d) {
 				var mystring = this.getAttribute("class");
 				var arr = mystring.split(" ", 2);
-				var firstWord = arr[0]; 
+				var firstWord = arr[0];
 
 				d3.selectAll("." + firstWord).transition()
 					.style("stroke", "none")
@@ -268,12 +298,12 @@ CTPS.demoApp.generateChart = function(congestion) {
 
 				d3.selectAll(".map" + firstWord)
 					.style("opacity", .2)
-					.style("stroke-width", function(d) { return (1/d.properties.AM_SPD_IX*5); })
+					.style("stroke-width", function(d) { return (1/d.properties.am_spd_ix*5); })
 
 				tip2.hide(d);
 			})
-		.html(function(d) { return d.properties.ROUTE_NUM; });
-	
+		.html(function(d) { return d.properties.route_num; });
+
 	//Create PM Charts
 
 var pmchartContainer = d3.select("#twoCharts").append("svg")
@@ -283,7 +313,7 @@ var pmchartContainer = d3.select("#twoCharts").append("svg")
 		.attr("y", 0);
 
 
-	pmchartContainer.call(tip2); 
+	pmchartContainer.call(tip2);
 
 pmchartContainer.selectAll(".labels")
 		.data(nested_directions)
@@ -291,11 +321,11 @@ pmchartContainer.selectAll(".labels")
 		.append("text")
 		.attr("class", "labels")
 			.attr("x", 35)
-			.attr("y", function(d) { 
-				if (d.values[0].properties.DIRECTION == "Eastbound" || d.values[0].properties.DIRECTION == "Southbound") { 
-					return yScale(d.values[0].properties.ROUTE_NUM) + 10;
-				} else if (d.values[0].properties.DIRECTION == "Westbound" || d.values[0].properties.DIRECTION == "Northbound"){
-					return yScale(d.values[0].properties.ROUTE_NUM) - 8;
+			.attr("y", function(d) {
+				if (d.values[0].properties.direction == "Eastbound" || d.values[0].properties.direction == "Southbound") {
+					return yScale(d.values[0].properties.route_num) + 10;
+				} else if (d.values[0].properties.direction == "Westbound" || d.values[0].properties.direction == "Northbound"){
+					return yScale(d.values[0].properties.route_num) - 8;
 				} else {
 					return -200;
 				}})
@@ -306,28 +336,23 @@ pmchartContainer.selectAll(".labels")
 			.style("text-anchor", "middle")
 			.text(function(d) { return d.key;});
 
-	function pmfindFlipFrom(d) { 
-			var storage = []; 
-			interstateRoads.forEach(function(j){ 
-				if (j.properties.ROUTE_NUM == d.properties.ROUTE_NUM && j.properties.DIRECTION == d.properties.DIRECTION) { 
-					storage.push(j.properties.TO_MEAS); 
+	function pmfindFlipFrom(d) {
+			var storage = [];
+			interstateRoads.forEach(function(j){
+				if (j.properties.route_num == d.properties.route_num && j.properties.direction == d.properties.direction) {
+					storage.push(j.properties.to_meas);
 				}
 			})
-			var max = d3.max(storage); 
-			return max; 
+			var max = d3.max(storage);
+			return max;
 		}
 
-		//Normalize ROUTEFROM for display (flip westbounds and southbounds to match eastbound and north bound)
-		interstateRoads.forEach(function(i){ 
-			if ((i.properties.DIRECTION == "Westbound" || i.properties.DIRECTION == "Southbound")) { 
-				i.properties.NORMALIZEDSTART = -(i.properties.TO_MEAS - pmfindFlipFrom(i));
-			} else if (i.properties.ROUTE_NUM == "MA-2" && i.properties.DIRECTION == "Eastbound") {
-				i.properties.NORMALIZEDSTART = i.properties.FROM_MEAS - 5751.4697;
-			} else {
-				i.properties.NORMALIZEDSTART = i.properties.FROM_MEAS;
-			}
-		}); 
-	//Assign scales and axes 
+	//Normalize ROUTEFROM for display
+	interstateRoads.forEach(i => {
+			i.properties.normalizedstart = -(i.properties.to_meas - pmfindFlipFrom(i));
+	});
+
+	//Assign scales and axes
 	xScaleRoad = d3.scaleLinear().domain([0,d3.max(maxmins)]).range([75, 370]);
 	xScaleSegment = d3.scaleLinear().domain([0,d3.max(maxmins)]).range([0, 295]);
 
@@ -353,37 +378,37 @@ pmchartContainer.selectAll(".labels")
 			.attr("class", function(d) { return "segment" + d.id + " pmbars" ;})
 			.attr("height", 15)
 			.attr("width", function(d) {
-				if (isNaN(parseInt(d.properties.TO_MEAS))) { 
+				if (isNaN(parseInt(d.properties.to_meas))) {
 					return 0;
-				} else { 
-					return xScaleSegment(Math.abs(d.properties.TO_MEAS-d.properties.FROM_MEAS)); 
-				}})
-			.attr("x", function(d) { 
-				if (isNaN(parseInt(d.properties.FROM_MEAS))) { 
-					return -50;
-				} else { 
-					return xScaleRoad(d.properties.NORMALIZEDSTART)};
-				})
-			.attr("y", function(d) { 
-				if (d.properties.DIRECTION == "Eastbound" || d.properties.DIRECTION == "Northbound") { 
-					return yScale(d.properties.ROUTE_NUM) - 2 ;
 				} else {
-					return yScale(d.properties.ROUTE_NUM) - 20;
+					return xScaleSegment(Math.abs(d.properties.to_meas-d.properties.from_meas));
+				}})
+			.attr("x", function(d) {
+				if (isNaN(parseInt(d.properties.from_meas))) {
+					return -50;
+				} else {
+					return xScaleRoad(d.properties.normalizedstart)};
+				})
+			.attr("y", function(d) {
+				if (d.properties.direction == "Westbound" || d.properties.direction == "Northbound") {
+					return yScale(d.properties.route_num) - 20 ;
+				} else {
+					return yScale(d.properties.route_num) - 2;
 
 				}
 			})
 			.style("stroke", "none")
-			.style("fill", function(d) { 
-					if (!isNaN(d.properties.PM_SPD_IX)){
-						return colorScale(d.properties.PM_SPD_IX);
-					} else { 
-						return "#191b1d"; 
+			.style("fill", function(d) {
+					if (!isNaN(d.properties.pm_spd_ix)){
+						return colorScale(d.properties.pm_spd_ix);
+					} else {
+						return "#191b1d";
 					}
 				})
-			.on("mouseenter", function (d) { 
+			.on("mouseenter", function (d) {
 				var mystring = this.getAttribute("class");
 				var arr = mystring.split(" ", 2);
-				var firstWord = arr[0]; 
+				var firstWord = arr[0];
 
 				d3.selectAll("." + firstWord).transition()
 					.style("stroke", "#ddd")
@@ -393,14 +418,14 @@ pmchartContainer.selectAll(".labels")
 
 				d3.selectAll(".map" + firstWord)
 					.style("opacity", 1)
-					.style("stroke-width", function(d) { return (4/d.properties.AM_SPD_IX*5); })
+					.style("stroke-width", function(d) { return (4/d.properties.am_spd_ix*5); })
 
-				tip2.show(d); 
+				tip2.show(d);
 			})
 			.on("mouseleave", function (d) {
 				var mystring = this.getAttribute("class");
 				var arr = mystring.split(" ", 2);
-				var firstWord = arr[0]; 
+				var firstWord = arr[0];
 
 				d3.selectAll("." + firstWord).transition()
 					.style("stroke", "none")
@@ -410,16 +435,16 @@ pmchartContainer.selectAll(".labels")
 
 				d3.selectAll(".map" + firstWord)
 					.style("opacity", .2)
-					.style("stroke-width", function(d) { return (1/d.properties.AM_SPD_IX*5); })
+					.style("stroke-width", function(d) { return (1/d.properties.am_spd_ix*5); })
 
 				tip2.hide(d);
 			})
-		.html(function(d) { return d.properties.ROUTE_NUM; });
+		.html(function(d) { return d.properties.route_num; });
 
 		//Color key
 		var xPos = 5;
-		var yPos = 450; 
-		var height = 600; 
+		var yPos = 450;
+		var height = 600;
 		//background
 		twoCharts.append("text")
 			.style("font-weight", 700)
@@ -466,38 +491,38 @@ pmchartContainer.selectAll(".labels")
 }
 
 /*
-CTPS.demoApp.generateTimes = function(interstateRoads) {	
+CTPS.demoApp.generateTimes = function(interstateRoads) {
 
 	var cumulativeTime = d3.select("#cumulativetime").append("svg")
 		.attr("width", "100%")
 		.attr("height", 600);
 
 	var nested_roads = d3.nest()
-	.key(function(d) { return d.properties.ROUTE_NUM + " " + d.properties.DIRECTION; })
+	.key(function(d) { return d.properties.route_num + " " + d.properties.direction; })
 	.entries(interstateRoads);
 
-		//mouseover function	
+		//mouseover function
 	var tip2 = d3.tip()
 	  .attr('class', 'd3-tip')
 	  .attr("background", "black")
 	  .attr("color", "white")
 	  .offset([-10, 0])
 	  .html(function(d) {
-			return d.properties.ROUTE_NUM + " " + d.properties.DIRECTION;
+			return d.properties.route_num + " " + d.properties.direction;
 	  });
 
-	cumulativeTime.call(tip2); 
+	cumulativeTime.call(tip2);
 
-	var routes = []; 
+	var routes = [];
 	var maxmins = [];
 
-	interstateRoads.forEach(function(i){ 
-		routes.push(i.properties.ROUTE_NUM)
-		maxmins.push(i.properties.TO_MEAS)
+	interstateRoads.forEach(function(i){
+		routes.push(i.properties.route_num)
+		maxmins.push(i.properties.to_meas)
 	})
-	routes.sort(); 
+	routes.sort();
 
-	//Assign scales and axes 
+	//Assign scales and axes
 	xScale = d3.scaleLinear().domain([0, 3.5]).range([50, 1050]);
 	yScale = d3.scaleLinear().domain([0, 6]).range([550, 60]);
 
@@ -508,11 +533,11 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 		.attr("transform", "translate(0, 550)").style("stroke-width", "1px")
 		.style("font-size", "1.0em")
 		.call(xAxis);
-	
+
 	cumulativeTime.append("g").attr("class", "axis")
 		.attr("transform", "translate(50, 0)")
 		.style("font-size", "1.0em")
-		.call(yAxis); 
+		.call(yAxis);
 
 	cumulativeTime.append("line")
 		.attr("x1", xScale(1))
@@ -530,33 +555,33 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 		.attr("stroke-width", .5)
 		.attr("stroke", "#ddd")
 
-	nested_roads.forEach(function(i) { 
-		var amcumulative = 0; 
-		var pmcumulative = 0; 
+	nested_roads.forEach(function(i) {
+		var amcumulative = 0;
+		var pmcumulative = 0;
 
-		i.values.sort(function(a,b) { 
-			var nameA = a.properties.NORMALIZEDSTART; // ignore upper and lowercase
-			var nameB = b.properties.NORMALIZEDSTART;
+		i.values.sort(function(a,b) {
+			var nameA = a.properties.normalizedstart; // ignore upper and lowercase
+			var nameB = b.properties.normalizedstart;
 			  if (nameA < nameB) {return -1; }
 			  if (nameA > nameB) {return 1;}
-			  return 0; 
+			  return 0;
 		});
 
-		i.values.forEach(function(j){ 
+		i.values.forEach(function(j){
 
 			cumulativeTime.append("circle")
-					.attr("class", j.properties.ROUTE_NUM + j.properties.DIRECTION + " circles")
-					.attr("cx", xScale(j.properties.AM_SPD_IX))
-					.attr("cy", yScale(j.properties.AM_AVTT_IX))
-					.attr("r", j.properties.LANES * j.properties.LANES)
+					.attr("class", j.properties.route_num + j.properties.direction + " circles")
+					.attr("cx", xScale(j.properties.am_spd_ix))
+					.attr("cy", yScale(j.properties.am_avtt_ix))
+					.attr("r", j.properties.lanes * j.properties.lanes)
 					.style("stroke", "#FFd056")
 					.style("fill", "#191b1d")
 					.style("stroke-width", 1)
 					.style("opacity", .5)
-					.on("mouseenter", function () { 
+					.on("mouseenter", function () {
 						var mystring = this.getAttribute("class");
 						var arr = mystring.split(" ", 2);
-						var firstWord = arr[0]; 
+						var firstWord = arr[0];
 
 						d3.selectAll(".circles")
 							.style("opacity", .1);
@@ -565,7 +590,7 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 							.style("stroke-width", 2)
 							.style("opacity", 1)
 
-						tip2.show(j); 
+						tip2.show(j);
 					})
 					.on("mouseleave", function () {
 						d3.selectAll(".circles")
@@ -576,17 +601,17 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 					});
 
 			cumulativeTime.append("circle")
-					.attr("class", j.properties.ROUTE_NUM + j.properties.DIRECTION + " circles")
-					.attr("cx", xScale(j.properties.PM_SPD_IX))
-					.attr("cy", yScale(j.properties.PM_AVTT_IX))
-					.attr("r", j.properties.LANES * j.properties.LANES)
+					.attr("class", j.properties.route_num + j.properties.direction + " circles")
+					.attr("cx", xScale(j.properties.pm_spd_ix))
+					.attr("cy", yScale(j.properties.pm_avtt_ix))
+					.attr("r", j.properties.lanes * j.properties.lanes)
 					.style("stroke", "#408DFF")
 					.style("fill", "#191b1d")
 					.style("opacity", .5)
-					.on("mouseenter", function () { 
+					.on("mouseenter", function () {
 						var mystring = this.getAttribute("class");
 						var arr = mystring.split(" ", 2);
-						var firstWord = arr[0]; 
+						var firstWord = arr[0];
 
 						d3.selectAll(".circles")
 							.style("opacity", .1);
@@ -595,7 +620,7 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 							.style("stroke-width", 2)
 							.style("opacity", 1)
 
-						tip2.show(j); 
+						tip2.show(j);
 					})
 					.on("mouseleave", function () {
 						d3.selectAll(".circles")
@@ -620,19 +645,19 @@ CTPS.demoApp.generateTimes = function(interstateRoads) {
 		.text("Travelling at Speed Limit")
 }
 
-CTPS.demoApp.generateTraveller = function(cities, congestion) { 
+CTPS.demoApp.generateTraveller = function(cities, congestion) {
 	//Map of free flow
 	// SVG Viewport
 	var interstateRoads = topojson.feature(congestion, congestion.objects.collection).features;
 
 	interstateRoads.sort(function(a,b){
-		var nameA = a.properties.ROUTE_NUM;
-		var nameB = b.properties.ROUTE_NUM;
+		var nameA = a.properties.route_num;
+		var nameB = b.properties.route_num;
 		if (nameA < nameB) { return -1}
 		if (nameA > nameB) { return 1}
-		else { 
-			var nameC = a.properties.FROM_MEAS;
-			var nameD = b.properties.FROM_MEAS;
+		else {
+			var nameC = a.properties.from_meas;
+			var nameD = b.properties.from_meas;
 			if (nameC < nameD) { return -1}
 			if (nameC > nameD) { return 1}
 			return 0;
@@ -644,7 +669,7 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
     .rotate([71 + 30 / 60, -41 ])
 	.scale([18000]) // N.B. The scale and translation vector were determined empirically.
 	.translate([40,750]);
-	
+
 	var geoPath = d3.geoPath().projection(projection);
 
 	var freeFlow = d3.select("#freeFlow").append("svg")
@@ -657,7 +682,7 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 		.enter()
 		.append("path")
 			.attr("class", "freeFlow")
-			.attr("id", function(d, i) { return d.properties.BORDER_LINK_ID; })
+			.attr("id", function(d, i) { return d.properties.border_link_id; })
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", "#ddd")
 			.style("stroke", "#191b1d")
@@ -686,7 +711,7 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 		.enter()
 		.append("path")
 			.attr("class", "amCong")
-			.attr("id", function(d, i) { return d.properties.BORDER_LINK_ID; })
+			.attr("id", function(d, i) { return d.properties.border_link_id; })
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", "#ddd")
 			.style("stroke", "#191b1d")
@@ -702,8 +727,8 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 			.style("fill", "none")
 			.style("stroke-width", 0)
 			.style("stroke-linejoin", "round")
-			.style("stroke", function(d) { 
-				return colorScale(d.properties.AM_SPD_IX);
+			.style("stroke", function(d) {
+				return colorScale(d.properties.am_spd_ix);
 			})
 			.style("opacity", 0)
 
@@ -717,7 +742,7 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 		.enter()
 		.append("path")
 			.attr("class", "pmCong")
-			.attr("id", function(d, i) { return d.properties.BORDER_LINK_ID; })
+			.attr("id", function(d, i) { return d.properties.border_link_id; })
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", "#ddd")
 			.style("stroke", "#191b1d")
@@ -733,8 +758,8 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 			.style("fill", "none")
 			.style("stroke-width", 0)
 			.style("stroke-linejoin", "round")
-			.style("stroke", function(d) { 
-				return colorScale(d.properties.PM_SPD_IX);
+			.style("stroke", function(d) {
+				return colorScale(d.properties.pm_spd_ix);
 			})
 			.style("opacity", 0)
 
@@ -747,42 +772,42 @@ CTPS.demoApp.generateTraveller = function(cities, congestion) {
 		.text("Time spent in congestion:" + minutes + " min")*/
 /*
 	//Click button to start animation
-	d3.selectAll("#congAnim").on("click", function() { 
+	d3.selectAll("#congAnim").on("click", function() {
 	//Freeflow Animation
 		var timecounter = 0;
-	    var minutes = 0; 
+	    var minutes = 0;
 
 	    d3.selectAll(".freeFlowRoad")
 			.transition()
-			.delay(function(d) { 
-				timecounter += d.properties.SPD_LIMIT ;
+			.delay(function(d) {
+				timecounter += d.properties.spd_limit ;
 				return timecounter;
 			})
 			.duration(2400)
 			.style("stroke-width", 3)
 			.style("opacity", 1)
-			
+
 
 		//AM Animation
 		var timecounteram = 0;
 	    d3.selectAll(".amCongRoad").transition()
-			.delay(function(d) { 
-				timecounteram += (1/d.properties.AM_SPD_IX) * d.properties.SPD_LIMIT ;
+			.delay(function(d) {
+				timecounteram += (1/d.properties.am_spd_ix) * d.properties.spd_limit ;
 				return timecounteram;
 			})
-			.duration(function(d) { return (1/d.properties.AM_SPD_IX) * 2400; })
-			.style("stroke-width", function(d) { return 1/d.properties.AM_SPD_IX * 5; })
+			.duration(function(d) { return (1/d.properties.am_spd_ix) * 2400; })
+			.style("stroke-width", function(d) { return 1/d.properties.am_spd_ix * 5; })
 			.style("opacity", 1)
 
 		//PM Animation
 		var timecounterpm = 0;
 	    d3.selectAll(".pmCongRoad").transition()
-			.delay(function(d) { 
-				timecounterpm += (1/d.properties.PM_SPD_IX) * d.properties.SPD_LIMIT ;
+			.delay(function(d) {
+				timecounterpm += (1/d.properties.pm_spd_ix) * d.properties.spd_limit ;
 				return timecounterpm;
 			})
-			.duration(function(d) { return (1/d.properties.PM_SPD_IX) * 2400; })
-			.style("stroke-width", function(d) { return 1/d.properties.PM_SPD_IX * 5; })
+			.duration(function(d) { return (1/d.properties.pm_spd_ix) * 2400; })
+			.style("stroke-width", function(d) { return 1/d.properties.pm_spd_ix * 5; })
 			.style("opacity", 1)
 	})
 
