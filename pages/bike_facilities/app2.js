@@ -1,4 +1,10 @@
-//Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
+// JS code for visualization of off-road biycle facility data.
+// Code written by Beatrice Jin, 2016.
+// Contact: beatricezjin@gmail.com
+// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
+// Contact: bkrepp@ctps.org
+//
+
 var CTPS = {};
 CTPS.demoApp ={};
 var f = d3.format(".2");
@@ -30,9 +36,9 @@ var colorScaleBars2 = d3.scaleThreshold()
 
 //Using the d3.queue.js library
 d3.queue()
-  .defer(d3.json, "../../data/json/boston_region_mpo_towns.topo.json")
-  .defer(d3.csv, "../../data/csv/off_road_bike_faciliites_2011.csv")
-  .defer(d3.csv, "../../data/csv/off_road_bike_facilities_2016.csv")
+  .defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
+  .defer(d3.csv, "../../data/csv/off_road_bike_faciliites_2011_97towns.csv")
+  .defer(d3.csv, "../../data/csv/off_road_bike_facilities_2016_97towns.csv")
   .awaitAll(function(error, results){ 
     CTPS.demoApp.generateMap(results[0],results[1],results[2]);
     CTPS.demoApp.generatePlot(results[1], results[2]);
@@ -40,8 +46,8 @@ d3.queue()
   }); 
 
 d3.queue()
-  .defer(d3.json, "../../data/json/boston_region_mpo_towns.topo.json")
-  .defer(d3.csv, "../../data/csv/off_road_bike_facilities_2016.csv")
+  .defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
+  .defer(d3.csv, "../../data/csv/off_road_bike_facilities_2016_97towns.csv")
   .awaitAll(function(error, results){ 
     CTPS.demoApp.generateMap2(results[0],results[1]);
     CTPS.demoApp.generatePlot2(results[1]);
@@ -54,12 +60,12 @@ CTPS.demoApp.generateMap = function(mpoTowns, bike2011, bike2016) {
     .attr('class', 'd3-tip')
     .offset([90, 0])
     .html(function(d) {
-      var capTown = d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      var capTown = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
       var existing2011 = findIndex2011(capTown, "off_road_miles");
       if (isNaN(existing2011)) { existing2011 = 0; }
-      var existing2016 = findIndex2016(d.properties.TOWN, "existing_miles");
+      var existing2016 = findIndex2016(d.properties.town, "existing_miles");
       if (isNaN(existing2016)) { existing2016 = 0; }
-      var centerline = parseInt(findIndex2016(d.properties.TOWN, "existing_miles")/findIndex2016(d.properties.TOWN, "existing_percent"));      
+      var centerline = parseInt(findIndex2016(d.properties.town, "existing_miles")/findIndex2016(d.properties.town, "existing_percent"));      
       return "<p>" + capTown + "</p>" + e(existing2011) + " Existing Miles in 2011 <br>" + e(existing2016) + " Existing Miles in 2016";
     })
 
@@ -88,8 +94,8 @@ CTPS.demoApp.generateMap = function(mpoTowns, bike2011, bike2016) {
   var findTownIndex = function(townID) { 
     var towns = topojson.feature(mpoTowns, mpoTowns.objects.boston_region_mpo_towns).features;
     for (var i = 0; i < towns.length; i++) { 
-      if (towns[i].properties.TOWN_ID == townID) {
-          var capTown = towns[i].properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      if (towns[i].properties.town_id == townID) {
+          var capTown = towns[i].properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
           return capTown;
       }
     }
@@ -101,14 +107,14 @@ CTPS.demoApp.generateMap = function(mpoTowns, bike2011, bike2016) {
     .data(topojson.feature(mpoTowns, mpoTowns.objects.boston_region_mpo_towns).features)
     .enter()
     .append("path")
-      .attr("class", function(d){ return d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
+      .attr("class", function(d){ return d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
       .attr("d", function(d, i) {return geoPath(d); })
       .style("fill", function(d){ 
-        if (findIndex2016(d.properties.TOWN, "existing_miles") == 0 || isNaN(findIndex2016(d.properties.TOWN, "existing_miles")) ) { return colorScaleBars2(0) } 
-        else {return colorScaleBars2(findIndex2016(d.properties.TOWN, "existing_miles"))};  
+        if (findIndex2016(d.properties.town, "existing_miles") == 0 || isNaN(findIndex2016(d.properties.town, "existing_miles")) ) { return colorScaleBars2(0) } 
+        else {return colorScaleBars2(findIndex2016(d.properties.town, "existing_miles"))};  
       })
       .style("opacity", function(d) { 
-          if (findIndex2016(d.properties.TOWN, "existing_miles") == 0 || isNaN(findIndex2016(d.properties.TOWN, "existing_miles")) ) { return .1 } 
+          if (findIndex2016(d.properties.town, "existing_miles") == 0 || isNaN(findIndex2016(d.properties.town, "existing_miles")) ) { return .1 } 
           else { return 1}
       })
       .style("stroke", "#191b1d")
@@ -287,11 +293,11 @@ CTPS.demoApp.generateMap2 = function(mpoTowns, bikeData) {
     .attr('class', 'd3-tip')
     .offset([90, 0])
     .html(function(d) {
-      var capTown = d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      var capTown = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
       var existing = findIndex(capTown, "existing_miles");
       var constructing = findIndex(capTown, "constructing_miles");
       var projected = findIndex(capTown, "projected_miles");
-      return "<p>" + d.properties.TOWN + "</p>" + e(existing) + " Existing Miles<br>" + e(constructing) + " Miles Under Construction or In Design<br>" + e(projected) + " Miles Planned and Envisioned";
+      return "<p>" + d.properties.town + "</p>" + e(existing) + " Existing Miles<br>" + e(constructing) + " Miles Under Construction or In Design<br>" + e(projected) + " Miles Planned and Envisioned";
     })
 
   var svgContainer = d3.select("#map2").append("svg")
@@ -312,8 +318,8 @@ CTPS.demoApp.generateMap2 = function(mpoTowns, bikeData) {
 
   var findTownIndex = function(townID) { 
     for (var i = 0; i < towns.length; i++) { 
-      if (towns[i].properties.TOWN_ID == townID) {
-          var capTown = towns[i].properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      if (towns[i].properties.town_id == townID) {
+          var capTown = towns[i].properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
           return capTown;
       }
     }
@@ -325,14 +331,14 @@ CTPS.demoApp.generateMap2 = function(mpoTowns, bikeData) {
     .data(towns)
     .enter()
     .append("path")
-      .attr("class", function(d){ return d.properties.TOWN.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
+      .attr("class", function(d){ return d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})})
       .attr("d", function(d, i) {return geoPath(d); })
       .style("fill", function(d){ 
-        if (isNaN(findIndex(d.properties.TOWN, "total"))){return colorScaleBars2(0)}
-        else {return colorScaleBars2(+findIndex(d.properties.TOWN, "total")); } 
+        if (isNaN(findIndex(d.properties.town, "total"))){return colorScaleBars2(0)}
+        else {return colorScaleBars2(+findIndex(d.properties.town, "total")); } 
       })
       .style("opacity", function(d) { 
-          if (findIndex(d.properties.TOWN, "total") == 0 ) { return .1 } 
+          if (findIndex(d.properties.town, "total") == 0 ) { return .1 } 
           else { return 1}
       })
       .style("stroke", "#191b1d")
