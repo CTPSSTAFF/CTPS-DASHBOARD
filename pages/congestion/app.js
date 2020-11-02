@@ -19,7 +19,7 @@ var colorScale = d3.scaleThreshold()
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-    .defer(d3.json, "../../data/json/cmp_2015_exp_routes_ext.geo.json")
+    .defer(d3.json, "../../data/json/CTPS_CMP_2019_EXP_ROUTES_postgresql.geo.json")
 	.awaitAll(function(error, results){
 		CTPS.demoApp.generateMap(results[0],results[1]);
 		CTPS.demoApp.generateChart(results[1]);
