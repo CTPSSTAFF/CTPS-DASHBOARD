@@ -1,4 +1,9 @@
-//Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
+// JS code for visualization of bridge data.
+// Code written by Beatrice Jin, 2016.
+// Contact: beatricezjin@gmail.com
+// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
+// Contact: bkrepp@ctps.org
+//
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
@@ -20,7 +25,7 @@ var geoPath = d3.geoPath().projection(projection);
 
 //Using the d3.queue.js library
 d3.queue()
-	.defer(d3.csv, "../../data/csv/bridge_condition_timeline_3.csv")
+	.defer(d3.csv, "../../data/csv/bridge_condition_timeline_97towns_v4.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateBridgeDeckArea(results[0]);
 	}); 

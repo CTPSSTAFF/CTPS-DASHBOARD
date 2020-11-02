@@ -65,13 +65,11 @@
  <button class='CONCORD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Concord</button>
  <button class='DANVERS townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Danvers</button>
  <button class='DEDHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Dedham</button>
- <button class='DUXBURY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Duxbury</button>
  <button class='EVERETT townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Everett</button>
  <button class='FOXBOROUGH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Foxborough</button>
  <button class='FRAMINGHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Framingham</button>
  <button class='FRANKLIN townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Franklin</button>
  <button class='GLOUCESTER townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Gloucester</button>
- <button class='HANOVER townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hanover</button>
  <button class='HINGHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hingham</button>
  <button class='HOPKINTON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hopkinton</button>
  <button class='HUDSON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hudson</button>
@@ -98,7 +96,6 @@
  <button class='NORWELL townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Norwell</button>
  <button class='NORWOOD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Norwood</button>
  <button class='PEABODY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Peabody</button>
- <button class='PEMBROKE townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Pembroke</button>
  <button class='QUINCY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Quincy</button>
  <button class='RANDOLPH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Randolph</button>
  <button class='READING townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Reading</button>
@@ -110,7 +107,6 @@
  <button class='SOMERVILLE townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Somerville</button>
  <button class='SOUTHBOROUGH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Southborough</button>
  <button class='STONEHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stoneham</button>
- <button class='STOUGHTON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stoughton</button>
  <button class='STOW townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stow</button>
  <button class='SUDBURY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Sudbury</button>
  <button class='TOPSFIELD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Topsfield</button>
