@@ -1,4 +1,10 @@
-//Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
+// JS code for visualization of pavement condition data for interstate highways.
+// Code written by Beatrice Jin, 2016.
+// Contact: beatricezjin@gmail.com
+// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
+// Contact: bkrepp@ctps.org
+//
+
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
