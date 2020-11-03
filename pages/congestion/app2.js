@@ -17,7 +17,7 @@ var colorScale = d3.scaleThreshold()
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	.defer(d3.json, "../../data/json/CMP_2014_ART_ROUTES.topojson")
+	.defer(d3.json, "../../data/json/CMP_2014_ART_ROUTES_EXT_MPO.geo.json")
 	.defer(d3.csv, "../../data/csv/arterial_route_id_table.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateMap(results[0],results[1], results[2]);
@@ -30,7 +30,8 @@ d3.queue()
 CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {	
 	// Show name of MAPC Sub Region
 	// Define Zoom Behavior
-	var arterialRoads = topojson.feature(arterials, arterials.objects.CMP_2014_ART_ROUTES_EXT_MPO).features;
+	// var arterialRoads = topojson.feature(arterials, arterials.objects.CMP_2014_ART_ROUTES_EXT_MPO).features;
+	var arterialRoads = arterials.features;
 
 	var projScale = 45000,
 		projXPos = 100,
