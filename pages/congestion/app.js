@@ -1,7 +1,8 @@
 // JS code for congestion visualization for express highways.
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
-// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
+// Modified by Ben Krepp to reflect change to 97-town MPO, 
+// migration of backing database to PostgreSQL, and 2019 performance data.
 // Contact: bkrepp@ctps.org
 //
 
