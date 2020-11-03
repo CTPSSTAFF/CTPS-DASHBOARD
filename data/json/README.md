@@ -4,7 +4,15 @@
 * boston_region_mpo_towns_97.geo.json -- geometry and attributes of towns in 97-town MPO, in GeoJSON format
 * boston_region_mpo_towns_97.topo.json -- geometry and attributes of towns in 97-town MPO, in TopoJSON fomrat
 * city_lane_avgs.JSON - __unknown, possibly unused__
-* CMP_2014_ART_ROUTES.topojson -- geometry and 2014 performance attributes of arterial routes in MPO region, in TopoJSON format; this data was extracted from an ArcGIS feature class backed by an Oracle database, and attribute (property) names in __UPPERCASE__. In addition to the attributes in the Oracle database, it includes an attribute named __NORMALIZEDSTART__ that was added after-the-fact; the means used to compute the value of this field are __unknown__ as of the time of writing.
+* CMP_2014_ART_ROUTES.topojson -- geometry and 2014 performance attributes of arterial routes in MPO region, in TopoJSON format.
+This data was extracted from an ArcGIS feature class backed by an Oracle database, and attribute (property) names in __UPPERCASE__. 
+In addition to the attributes in the Oracle database, it includes an attribute named __NORMALIZEDSTART__ that was added after-the-fact; 
+the means used to compute the value of this field are __unknown__ as of the time of writing.
+It also includes an attribute named __RTE_NAME_ID__ which was apparently derived from joining the underlying attribute table with the
+arterial_route_id_table.csv (found in the directory ../csv) on the "RID" field, and copying the value of the "ROUTE" attribute in the
+joined table as the value of the newly-created "RTE_NAME_ID" attribute. The RTE_NAME_ATTRIBUTE is __not__ in the underlying Oracle database.
+* CMP_2014_ART_ROUTES_EXT_MPO.geo.json - geometry and 2014 performance attributes of arterial routes in MPO region in GeoJSON format.
+This __appears__ to be the result of a direct conversion of CMP_2014_ART_ROUTES.topojson into GeoJSON format.
 * CMP_2014_EXP_ROUTES.topojson -- geometry and 2014 performance attributes of express routes in MPO region, in TopoJSON format; this data was extracted from an ArcGIS feature class backed by an Oracle database, and has attribute (property) names in __UPPERCASE__.
 * cmp_2015_exp_routes_ext.geo.json -- geometry and 2015 performance attributes of express routes in MPO region in GeoJSON format; this data was extracted from an ArcGIS feature class backed by an Oracle database, and has attribute (property) names in __lowercase__.
 * CTPS_CMP_2014_ART_ROUTES_postgresql.geo.json -- geometry and 2014 performance attributes of arterial routes in MPO region, in GeoJSON format; this data was extracted from an ArcGIS feature class backed by an PostgreSQL database, and attribute (property) names in __lowercase__. It currently does __ not__ includes an attribute named __NORMALIZEDSTART__.
