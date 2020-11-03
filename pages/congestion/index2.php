@@ -22,6 +22,8 @@
 <link href="../../libs/google-fonts.css" rel="stylesheet">
 <!-- Jquery -->
 <script src="../../libs/jquery-2.2.4.min.js"></script>
+<!-- Underscore -->
+<script src="../../libs/underscore-min.js"></script>
 
 <!-- Bootstrap-->
 <script src="../../libs/bootstrap.min.js"></script>
