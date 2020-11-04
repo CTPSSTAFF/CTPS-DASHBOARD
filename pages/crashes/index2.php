@@ -62,7 +62,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 		</div>
 
 	<h3>One Year of Crashes</h3>
-	<p> Crashes involving motorized vehicles caused a total of 16,869 injuries and 124 fatalities in the Boston region in 2014.</p>
+	<p> Crashes involving motorized vehicles caused a total of 16,268 injuries and 120 fatalities in the Boston region in 2014.</p>
 	<!--
 	<p>Each dot below represents one injury and each solid dot represents one fatality as a result of a motorized crash.</p>
 		<div class="col-md-12 key">
