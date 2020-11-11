@@ -1,9 +1,4 @@
-// JS code for visualization of bridge data.
-// Code written by Beatrice Jin, 2016.
-// Contact: beatricezjin@gmail.com
-// Modified by Ben Krepp to reflect change to 97-town MPO, and migration of backing database to PostgreSQL, 2019.
-// Contact: bkrepp@ctps.org
-//
+//Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
@@ -25,7 +20,7 @@ var geoPath = d3.geoPath().projection(projection);
 
 //Using the d3.queue.js library
 d3.queue()
-	.defer(d3.csv, "../../data/csv/bridge_condition_timeline_97towns_v4.csv")
+	.defer(d3.csv, "../../data/csv/bridge_condition_timeline_3.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateBridgeDeckArea(results[0]);
 	}); 
@@ -198,13 +193,13 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 		.attr("x", -350)
 		.attr("y", 20)
 		.attr("transform", "rotate(-90)")
-		.text("Percent of Bridge Deck Area")
+		.text("Percent of NHS Bridge Deck Area")
 
     timeline.append("text")
 		.attr("x", 180)
 		.attr("y", -440)
 		.attr("transform", "rotate(-270)")
-		.text("Average Health Index")
+		.text("Average Bridge Health Index");
 
 	timeline.append("g").attr("class", "axis")
 		.attr("transform", "translate(0, 450)")
@@ -312,14 +307,14 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 590)
-			.text("% structurally deficient")
+			.text("Percent of structurally deficient")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 603)
-			.text("bridge deck area")
+			.text("NHS bridge deck area")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 
@@ -334,7 +329,7 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 550)
-			.text("% non-structurally deficient")
+			.text("Percent of non-structurally deficient")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 

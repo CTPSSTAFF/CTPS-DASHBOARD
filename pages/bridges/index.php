@@ -36,13 +36,44 @@
 	<?php include '../../components/top-nav.php';?>
 </div> 
 <div id="header" class="col-md-10 col-md-offset-1">
-<h1>Bridge Condition</h1>
-<p>The 2,866 bridges located in the Boston region connect places and carry people traveling by automobile, bus, train, bicycle, and foot. MassDOT and the MBTA monitor and classify the condition of all bridges on a regular basis, whether or not they are owned by the Commonwealth. The Boston Region MPO is required to monitor and report on the bridges in the region that are listed in the National Bridge Inventory (NBI), which includes records of all bridges that are more than 20 feet long. In 2016, there were 1,622 bridges located in the Boston region that were listed in the NBI; of those bridges, 164 (10%) were classified as structurally deficient, meaning that one or more major bridge component (deck, substructure, or superstructure) require attention.</p>
 
-<p>For a full understanding of bridge conditions, consideration must be given to all bridge parts, not only the structurally deficient components. The Bridge Health Index (BHI), a weighted average of the health indices of a bridge’s elements (e.g. trusses, decks, bridge rails), provides a comprehensive overview of bridge conditions. The BHI is measured on a scale of zero to 100; a value of zero indicates that all of the bridge elements are in the worst condition, and a score of 85 or greater indicates that the bridge elements are in good condition. </p>
+<h1>Bridge Condition</h1>
+
+<p>The bridges located in the Boston region connect places and carry people traveling by automobile, bus, train, bicycle, and foot. 
+MassDOT and the Massachusetts Bay Transportation Authority (MBTA) monitor and classify the condition of all bridges on a regular basis, 
+whether or not they are owned by the Commonwealth. 
+The Boston Region MPO monitors the bridges in the region that are listed in the National Bridge Inventory (NBI), which includes records
+ of all bridges that are more than 20 feet long. 
+</p>
+
+<p>In 2016, there were 1,622 bridges located in the Boston region that were listed in the NBI; of those bridges, 164 (10 percent) were 
+classified as structurally deficient, meaning that one or more major bridge component (deck, substructure, or superstructure) require attention. 
+</p>
+
+<p>For a full understanding of bridge conditions, consideration must be given to all bridge parts, not only the structurally-deficient components. 
+The Bridge Health Index (BHI), a weighted average of the health indices of a bridge’s elements (such as trusses, decks, or bridge rails), provides
+ a comprehensive overview of bridge conditions. 
+ The BHI is measured on a scale of zero to 100; a value of zero indicates that all of the bridge elements are in the worst condition, and a score
+ of 85 or greater indicates that the bridge elements are in good condition. 
+</p>
+
+<p>The visualizations on this page show data from MassDOT’s Highway Division for the years 2007 to 2016. 
+For more information about this performance measure and related data, visit the Bridges section of the About page.
+</p>
 
 <h3>Trends</h3>
-<p>Select a city or town from the list below to see how the health and structural integrity of the bridges located within its borders have changed over the past decade. The chart on the right shows the <b><em>number of structurally deficient and non-structurally deficient bridges</em></b> within each municipality’s borders. (Only bridges listed in the NBI are included.) The chart on the left shows the <b><em>percentage of structurally deficient bridge deck area</em></b> for bridges that are located on the National Highway System; federal performance-based planning guidance requires MPOs to report this figure.</p>
+
+<p>Select a city or town from the list below 
+to see how the health and structural integrity of the bridges located within its borders have changed over the past decade. 
+</p>
+
+<p>The chart on the right shows the number of structurally deficient and non-structurally deficient bridges within
+ each municipality’s borders. (Only bridges listed in the NBI are included.)
+</p>
+
+<p>The chart on the left shows the percentage of structurally deficient bridge deck area for bridges that are located
+ on the National Highway System (NHS) in that municipality. 
+</p>
 
 <div class="col-md-12">
 <button class='ALL townpicker' autofocus><i class="fa fa-map-marker" aria-hidden="true"></i> All </button>
@@ -65,11 +96,13 @@
  <button class='CONCORD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Concord</button>
  <button class='DANVERS townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Danvers</button>
  <button class='DEDHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Dedham</button>
+ <button class='DUXBURY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Duxbury</button>
  <button class='EVERETT townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Everett</button>
  <button class='FOXBOROUGH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Foxborough</button>
  <button class='FRAMINGHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Framingham</button>
  <button class='FRANKLIN townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Franklin</button>
  <button class='GLOUCESTER townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Gloucester</button>
+ <button class='HANOVER townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hanover</button>
  <button class='HINGHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hingham</button>
  <button class='HOPKINTON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hopkinton</button>
  <button class='HUDSON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Hudson</button>
@@ -96,6 +129,7 @@
  <button class='NORWELL townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Norwell</button>
  <button class='NORWOOD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Norwood</button>
  <button class='PEABODY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Peabody</button>
+ <button class='PEMBROKE townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Pembroke</button>
  <button class='QUINCY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Quincy</button>
  <button class='RANDOLPH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Randolph</button>
  <button class='READING townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Reading</button>
@@ -107,6 +141,7 @@
  <button class='SOMERVILLE townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Somerville</button>
  <button class='SOUTHBOROUGH townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Southborough</button>
  <button class='STONEHAM townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stoneham</button>
+ <button class='STOUGHTON townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stoughton</button>
  <button class='STOW townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Stow</button>
  <button class='SUDBURY townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Sudbury</button>
  <button class='TOPSFIELD townpicker'><i class='fa fa-map-marker' aria-hidden='true'></i> Topsfield</button>

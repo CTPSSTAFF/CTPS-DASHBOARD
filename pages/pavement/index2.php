@@ -35,24 +35,44 @@
 		<p> The following table is readable only to screen readers. </p>
 	</div>
 	
-		
-
 	<h1>Pavement Condition</h1>
+	
+	<p>Freshly paved roads feel great under any set of wheels: automobile, motorcycle, bus, bicycle, scooter, or skateboard. 
+	  Unfortunately, roads in the Boston region steadily deteriorate with time, use, and New England weather. 
+	  Investments are made in roadway maintenance to extend pavement life and keep rides smooth. 
+	  Pavement condition is measured using the present serviceability index (PSI), which accounts for cracking, rutting,
+	  asphalt disintegration, and ride quality. 
+	  PSI scores range from zero (impassable) to five (perfectly smooth). 
+	</p>
 
-	<p>Freshly paved roads feel great under any set of wheels: automobile, motorcycle, bus, bicycle, scooter, or skateboard. Unfortunately, our roads steadily deteriorate with time, use, and New England weather. Investments are made in roadway maintenance to extend pavement life and keep rides smooth. Pavement condition is measured using the present serviceability index (PSI), a measure of a road’s roughness that accounts for patch work, rutting, and cracking. PSI scores range from zero (impassable) to five (perfectly smooth). Engineers consider a score of two or three as the minimum acceptable PSI.</p>
+	<p>The visualizations on this page show data from the Massachusetts Roadway Inventory for the years 2007 to 2014. 
+	   For more information about this performance measure and related data, visit the Pavement section on the About page.
+	</p>
 
 	<h2> Non-Interstate Pavement </h2>
 
 	<h3>Pavement Conditions in 2014</h3>
-	<p> Scroll down to compare pavement conditions on non-interstate roadways in the region’s cities and towns. The first column presents the overall distribution of pavement segments on the National Highway System and all MassDOT-owned non-National Highway System roads by their PSI score, with the average value highlighted. The second and third columns display the percent of pavement and the total lane miles of pavement on these roadways with acceptable PSI scores, respectively.</p>
-
+	
+	<p>Scroll down to compare pavement conditions on non-interstate roadways in the region’s cities and towns. 
+	 The first column presents the overall distribution of pavement segments on the National Highway System (NHS), excluding interstates, 
+	 and all MassDOT-owned non-NHS roads by their PSI score, with the average value highlighted. 
+	 The second and third columns display the percent of pavement and the total lane miles of pavement on these roadways with acceptable
+	 PSI scores, respectively. 
+	 The PSI thresholds for “excellent,” “good,” “fair,” and “poor” are less stringent for these roadways than for interstates. 
+	</p>
+	
 		<button class="bigbutton col-md-5" id="alphabetize" alt="Sort towns by alphabetical order" autofocus>Sort by Alphabetical Order</button>
 		<button class="bigbutton col-md-5" id="byAverages" alt="Sort towns by ascending average PSI">Sort by Average PSI</button>
 
 	<div id="citygradients" class="col-md-12"></div>
 
 	<h3> Trends</h3>
-	<p> Select a city or town from the list to see how the pavement conditions on non-interstate roadways on the National Highway System and all MassDOT-owned non-National Highway System roads within the municipality have changed over time. Each line charts the PSI value of a segment of a non-interstate road over the past decade.</p>
+	
+	<p>Select a city or town from the list to see how the pavement conditions on non-interstate roadways on the NHS 
+	   and all MassDOT-owned non-NHS roads within the municipality have changed over time. 
+	   Each line charts the PSI value of a segment of a non-interstate road over the past decade.
+	</p>
+	
 	
 	<div class="col-md-12">
 	<button class='ALL townpicker' autofocus><i class="fa fa-map-marker" aria-hidden="true"></i> All</button>
@@ -78,6 +98,7 @@
 	<button class='DANVERS townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Danvers</button>
 	<button class='DEDHAM townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Dedham</button>
 	<button class='DOVER townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Dover</button>
+	<button class='DUXBURY townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Duxbury</button>
 	<button class='ESSEX townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Essex</button>
 	<button class='EVERETT townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Everett</button>
 	<button class='FOXBOROUGH townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Foxborough</button>
@@ -85,6 +106,7 @@
 	<button class='FRANKLIN townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Franklin</button>
 	<button class='GLOUCESTER townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Gloucester</button>
 	<button class='HAMILTON townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Hamilton</button>
+	<button class='HANOVER townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Hanover</button>
 	<button class='HINGHAM townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Hingham</button>
 	<button class='HOLBROOK townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Holbrook</button>
 	<button class='HOLLISTON townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Holliston</button>
@@ -120,6 +142,7 @@
 	<button class='NORWELL townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Norwell</button>
 	<button class='NORWOOD townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Norwood</button>
 	<button class='PEABODY townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Peabody</button>
+	<button class='PEMBROKE townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Pembroke</button>
 	<button class='QUINCY townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Quincy</button>
 	<button class='RANDOLPH townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Randolph</button>
 	<button class='READING townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Reading</button>
@@ -134,6 +157,7 @@
 	<button class='SOMERVILLE townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Somerville</button>
 	<button class='SOUTHBOROUGH townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Southborough</button>
 	<button class='STONEHAM townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Stoneham</button>
+	<button class='STOUGHTON townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Stoughton</button>
 	<button class='STOW townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Stow</button>
 	<button class='SUDBURY townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Sudbury</button>
 	<button class='SWAMPSCOTT townpicker'><i class="fa fa-map-marker" aria-hidden="true"></i> Swampscott</button>
