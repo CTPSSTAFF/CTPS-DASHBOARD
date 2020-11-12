@@ -190,13 +190,13 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	var yAxisHD = d3.axisRight(yScaleHD);
 
 	timeline.append("text")
-		.attr("x", -350)
+		.attr("x", -370)
 		.attr("y", 20)
 		.attr("transform", "rotate(-90)")
 		.text("Percent of NHS Bridge Deck Area")
 
     timeline.append("text")
-		.attr("x", 180)
+		.attr("x", 160)
 		.attr("y", -440)
 		.attr("transform", "rotate(-270)")
 		.text("Average Bridge Health Index");
@@ -446,7 +446,7 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	}
 
 	timeline2.append("text")
-		.attr("x", -320)
+		.attr("x", -370)
 		.attr("y", 10)
 		.attr("transform", "rotate(-90)")
 		.text("Bridge Health Index for NBI bridges")
