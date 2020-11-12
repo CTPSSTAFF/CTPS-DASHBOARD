@@ -53,7 +53,7 @@
 		
 		<p>One major factor that shapes the Boston Region MPO’s performance-based planning and programming activities is the federal government’s
 		   set of performance management requirements for transportation agencies. (For more information, 
-		   visit <a href="bostonmpo.org/performance">bostonmpo/performance</a>.) 
+		   visit <a href="bostonmpo.org/performance">bostonmpo.org/performance</a>.) 
 		   MPO staff developed this dashboard prior to finalization of these performance requirements. 
 		   As a result, the performance measures that state transportation agencies, MPOs, and public transportation providers must monitor
 		   are similar to, but not the same as, several of the ones presented on this dashboard. The descriptions below discuss these variations. 
@@ -234,7 +234,7 @@
 		<p>All demographic data are reported at the US Census Bureau tract level. 
 		   Data used in the dashboard were obtained from the 2010 decennial census when available. 
 		   Data that were not available from that source were gathered from the 2010-14 American Community Survey (ACS).
-		   Data sources for each demographic are as follows:</p>
+		   Data sources for each demographic are as follows:
 			<ul>
 				<li>Over age 75: 2010 Decennial Census</li>
 				<li>Unemployment: 2010-2014 ACS</li>
