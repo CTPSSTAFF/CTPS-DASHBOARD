@@ -449,7 +449,7 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 		.attr("x", -320)
 		.attr("y", 10)
 		.attr("transform", "rotate(-90)")
-		.text("Bridge Health Index")
+		.text("Bridge Health Index for NBI bridges")
 
 	var xPos = 20; 
 	//Key
