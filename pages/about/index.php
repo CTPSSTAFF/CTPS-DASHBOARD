@@ -53,7 +53,7 @@
 		
 		<p>One major factor that shapes the Boston Region MPO’s performance-based planning and programming activities is the federal government’s
 		   set of performance management requirements for transportation agencies. (For more information, 
-		   visit <a href="https://bostonmpo.org/performance">bostonmpo.org/performance</a>.) 
+		   visit <a href="https://bostonmpo.org/performance" target="_blank">bostonmpo.org/performance</a>.) 
 		   MPO staff developed this dashboard prior to finalization of these performance requirements. 
 		   As a result, the performance measures that state transportation agencies, MPOs, and public transportation providers must monitor
 		   are similar to, but not the same as, several of the ones presented on this dashboard. The descriptions below discuss these variations. 
@@ -158,7 +158,7 @@
 		
 		<p>Congestion data are from a 2015 INRIX data set, which the MPO uses to support its Congestion Management Process (CMP). 
 		   These data can be found in the Central Transportation Planning Staff’s data catalogue on the 
-		   Boston Region MPO’s website, <a href="https://bostonmpo.org/data-catalog">bostonmpo.org/datacatalog</a>. 
+		   Boston Region MPO’s website, <a href="https://bostonmpo.org/data-catalog"  target="_blank">bostonmpo.org/datacatalog</a>. 
 		   Data from the Boston Region MPO area were selected and exported in GeoJSON format. 
 		</p>
 		
@@ -176,7 +176,7 @@
 		   which is the percent of the person-miles traveled on the Interstate System that are reliable. 
 		</p>
 		
-		<p>More information about the Boston Region MPO’s CMP is available at <a href="https://bostonmpo.org/cmp">bostonmpo.org/cmp</a>. 
+		<p>More information about the Boston Region MPO’s CMP is available at <a href="https://bostonmpo.org/cmp" target="_blank">bostonmpo.org/cmp</a>. 
 		</p>
 		
 		<h2> Sidewalks </h2>
