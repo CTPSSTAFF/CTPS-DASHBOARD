@@ -36,13 +36,44 @@
 	<?php include '../../components/top-nav.php';?>
 </div> 
 <div id="header" class="col-md-10 col-md-offset-1">
-<h1>Bridge Condition</h1>
-<p>The 2,866 bridges located in the Boston region connect places and carry people traveling by automobile, bus, train, bicycle, and foot. MassDOT and the MBTA monitor and classify the condition of all bridges on a regular basis, whether or not they are owned by the Commonwealth. The Boston Region MPO is required to monitor and report on the bridges in the region that are listed in the National Bridge Inventory (NBI), which includes records of all bridges that are more than 20 feet long. In 2016, there were 1,622 bridges located in the Boston region that were listed in the NBI; of those bridges, 164 (10%) were classified as structurally deficient, meaning that one or more major bridge component (deck, substructure, or superstructure) require attention.</p>
 
-<p>For a full understanding of bridge conditions, consideration must be given to all bridge parts, not only the structurally deficient components. The Bridge Health Index (BHI), a weighted average of the health indices of a bridge’s elements (e.g. trusses, decks, bridge rails), provides a comprehensive overview of bridge conditions. The BHI is measured on a scale of zero to 100; a value of zero indicates that all of the bridge elements are in the worst condition, and a score of 85 or greater indicates that the bridge elements are in good condition. </p>
+<h1>Bridge Condition</h1>
+
+<p>The bridges located in the Boston region connect places and carry people traveling by automobile, bus, train, bicycle, and foot. 
+MassDOT and the Massachusetts Bay Transportation Authority (MBTA) monitor and classify the condition of all bridges on a regular basis, 
+whether or not they are owned by the Commonwealth. 
+The Boston Region MPO monitors the bridges in the region that are listed in the National Bridge Inventory (NBI), which includes records
+ of all bridges that are more than 20 feet long. 
+</p>
+
+<p>In 2016, there were 1,622 bridges located in the Boston region that were listed in the NBI; of those bridges, 164 (10 percent) were 
+classified as structurally deficient, meaning that one or more major bridge component (deck, substructure, or superstructure) require attention. 
+</p>
+
+<p>For a full understanding of bridge conditions, consideration must be given to all bridge parts, not only the structurally-deficient components. 
+The Bridge Health Index (BHI), a weighted average of the health indices of a bridge’s elements (such as trusses, decks, or bridge rails), provides
+ a comprehensive overview of bridge conditions. 
+ The BHI is measured on a scale of zero to 100; a value of zero indicates that all of the bridge elements are in the worst condition, and a score
+ of 85 or greater indicates that the bridge elements are in good condition. 
+</p>
+
+<p>The visualizations on this page show data from MassDOT’s Highway Division for the years 2007 to 2016. 
+For more information about this performance measure and related data, visit the Bridges section of the About page.
+</p>
 
 <h3>Trends</h3>
-<p>Select a city or town from the list below to see how the health and structural integrity of the bridges located within its borders have changed over the past decade. The chart on the right shows the <b><em>number of structurally deficient and non-structurally deficient bridges</em></b> within each municipality’s borders. (Only bridges listed in the NBI are included.) The chart on the left shows the <b><em>percentage of structurally deficient bridge deck area</em></b> for bridges that are located on the National Highway System; federal performance-based planning guidance requires MPOs to report this figure.</p>
+
+<p>Select a city or town from the list below 
+to see how the health and structural integrity of the bridges located within its borders have changed over the past decade. 
+</p>
+
+<p>The chart on the right shows the number of structurally deficient and non-structurally deficient bridges within
+ each municipality’s borders. (Only bridges listed in the NBI are included.)
+</p>
+
+<p>The chart on the left shows the percentage of structurally deficient bridge deck area for bridges that are located
+ on the National Highway System (NHS) in that municipality. 
+</p>
 
 <div class="col-md-12">
 <button class='ALL townpicker' autofocus><i class="fa fa-map-marker" aria-hidden="true"></i> All </button>
