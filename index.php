@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <head lang="en">
 <meta charset="utf-8">
 <link rel="icon" href="goo.gl/xQW9eP">
@@ -29,7 +29,6 @@
 <!-- CSS Custom Styling -->
 <link rel="stylesheet" href="css/style.css"/>
 
-</head>
 
 <body>
 <div id="map"></div>
@@ -102,7 +101,15 @@
 	<h1>Boston </h1>
 	<h1>Region </h1>
 	<h1>MPO</h1>
+	<div id="landing_page_blurb" class="col-md4" style="text-transform:none">
+	<p>
+	The performance measures shown in this dashboard were selected by MPO staff and differ from those that states, 
+	MPOs, and transit agencies must monitor to meet federal requirements. 
+	For more information, see the <a href="pages/about/index.php">About</a> page.
+	</p>
+	</div>
 </div>
+
 
 <!-- Desktop nav --> 
 <div class="col-md-6 desktop-nav">
@@ -200,7 +207,7 @@
 			<div class="col-md-12 nav_metric">
 				<i class="fa fa-info-circle" aria-hidden="true"></i> About </div>
 				<div class="col-md-6">
-				<p>Purpose, data sources, data development methodology</p></div>
+				<p>Purpose, data sources, and data development methodology</p></div>
 			</a>
 		</div>
 		<!-- End About --> 
