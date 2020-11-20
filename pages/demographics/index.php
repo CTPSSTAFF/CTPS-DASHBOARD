@@ -51,10 +51,21 @@ text {fill: #ddd; font-size: 1.0em;}
 	<p> The following information is readable only to screen readers: Data for demographics is available on the CTPS Data 
 	Catalogue. You can download the spreadsheet after following this link: <a href="http://www.ctps.org/datacatalog_share/content/boston-region-mpo-2010-census-demographic-profile"> Demographics Spreadsheet </a> </p>
 </div>
-<p>The Boston region has a diverse population with residents of all ages and abilities, who represent various races and ethnicities, and who speak a number of languages. The Boston Region MPO has identified demographics that inform us about the differing transportation needs of residents and that impact the MPO’s transportation decision-making process. </p>
+
+<p>The Boston region has a diverse population with residents of all ages and abilities, who represent various races and ethnicities, 
+and who speak a number of languages. 
+The Boston Region MPO has gathered demographic data that helps staff learn about the different transportation needs of residents
+ and how to account for residents as part of the MPO’s transportation decision-making process.
+</p>
+
+
 
 <h3> A Closer Look at the Boston Population </h3>
-<p>Click on a tab below to select a demographic and then hover over the map to view data by US Census Bureau tract.</p>
+
+<p>Click on a tab below to select a demographic and then hover over the map to view data by United States Census Bureau tract. 
+See the About page for more information about census data sources. 
+</p>
+
 	<div class="col-md-12">
 	<button class='minority bigbutton col-md-4 I-93' autofocus> Minority </button>
 	<button class='employed bigbutton col-md-4 I-93'> Unemployment </button>
@@ -67,7 +78,12 @@ text {fill: #ddd; font-size: 1.0em;}
 	<div class="col-md-7" id="demographics_pop"></div></div></div>
 
 <h3> Race in the Boston Region </h3>
-<p>The map and chart below show the percent of the population by race in each census tract, including populations who identify with two or more races. They may be of Hispanic or non-Hispanic ethnicity.</p>
+
+<p>The map and chart below show the percent of the population by race in each census tract, including populations who identify with two or more races. 
+The people that identify as a particular race may be of Hispanic or non-Hispanic ethnicity.
+</p>
+
+
 	<div class="col-md-12">
 	<button class='white bigbutton col-md-3' autofocus> White </button>
 	<button class='black bigbutton col-md-3'> Black or African American </button>
@@ -82,13 +98,21 @@ text {fill: #ddd; font-size: 1.0em;}
 	<div class="col-md-7" id="demographics_race"></div></div>
 
 <h3> Ethnicity in the Boston Region </h3>
-<p>The map and chart below show the percent of the population that is of Hispanic ethnicity, regardless of race, in each census tract. Note that the Boston Region MPO considers the term “minority” to include all persons who are Hispanic (of any race) or non-White, as required by federal law.</p>
+
+<p>The map and chart below show the percent of the population that is of Hispanic ethnicity, regardless of race, in each census tract. 
+Note that the Boston Region MPO considers the term “minority” to include all persons who are Hispanic (of any race) or non-White, as required by federal law.
+</p>
+
 	<div class="col-md-12">
 	<div class="col-md-5" id="map_hisp"></div>
 	<div class="col-md-7" id="demographics_hisp"></div></div>
 
 <h3> Most Commonly Spoken Non-English Languages</h3>
-<p>Click on the tabs below to show the percent of the five non-English languages most commonly spoken in the Boston region, by census tract. Limited English Proficiency (LEP) refers to those residents five years or older who report speaking English “less than very well.”</p>
+
+<p>Click on the tabs below to show the percent of the five non-English languages most commonly spoken in the Boston region, by census tract. 
+Limited English Proficiency (LEP) refers to those residents five years or older who report speaking English “less than very well.”
+</p>
+
 	<div class="col-md-12">
 	<button class='spanish bigbutton col-md-2' autofocus> Spanish </button>
 	<button class='chinese bigbutton col-md-2'> Chinese </button>
@@ -100,8 +124,14 @@ text {fill: #ddd; font-size: 1.0em;}
 	<div class="col-md-5" id="map_lep"></div>
 	<div class="col-md-7" id="demographics_lep"></div></div>
 
-<h3> Disabilities Breakdown </h3>
-<p>Click on the tabs below to show the percent of persons who have a disability in each census tract. Persons with disabilities include those residents who report having one or more physical or cognitive disability. Note that disability data is subject to significant uncertainty, and should be used with caution. The number of people with disabilities may be under-reported.</p>
+<h3>Types of Disabilities</h3>
+
+<p>Click on the tabs below to show the percent of people in each census tract who have a disability. 
+Persons with disabilities include those residents who report having one or more physical or cognitive disabilities.
+Note that disability data are subject to significant uncertainty and should be used with caution.
+The number of people with disabilities may be underreported.
+</p>
+
 	<div class="col-md-12">
 	<button class='hearing bigbutton col-md-2' autofocus> Hearing Disability </button>
 	<button class='vision bigbutton col-md-2'> Vision Disability </button>
