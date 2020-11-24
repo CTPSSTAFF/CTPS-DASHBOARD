@@ -101,13 +101,6 @@
 	<h1>Boston </h1>
 	<h1>Region </h1>
 	<h1>MPO</h1>
-	<div id="landing_page_blurb" class="col-md4" style="text-transform:none">
-	<p>
-	The performance measures shown in this dashboard were selected by MPO staff and differ from those that states, 
-	MPOs, and transit agencies must monitor to meet federal requirements. 
-	For more information, see the <a href="pages/about/index.php">About</a> page.
-	</p>
-	</div>
 </div>
 
 
@@ -211,6 +204,16 @@
 			</a>
 		</div>
 		<!-- End About --> 
+        
+        <div id="bottom_blurb">
+            <div class="col-md-12">
+                <p>
+                The performance measures shown in this dashboard were selected by MPO staff and differ from those that states, 
+                MPOs, and transit agencies must monitor to meet federal requirements. 
+                For more information, see the <a href="pages/about/index.php">About</a> page.
+                </p>
+            </div>
+        </div>
 
 	</div>
 </div>
