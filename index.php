@@ -2,11 +2,12 @@
 <head lang="en">
 <meta charset="utf-8">
 <link rel="icon" href="goo.gl/xQW9eP">
+<!-- Comment inserted on dev branch. -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="goo.gl/xQW9eP">
 
-<title>Performance Dashboard Transportation in the Boston Region</title>
+<title>Performance Dashboard Transportation in the Boston Region MPO</title>
 
 <!-- Font Awesome -->
 <script src="libs/font-awesome.js"></script>
@@ -29,8 +30,23 @@
 <!-- CSS Custom Styling -->
 <link rel="stylesheet" href="css/style.css"/>
 
-</head>
+<script>
+(function(i,s,o,g,r,a,m){
+	i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+	a=s.createElement(o),m=s.getElementsByTagName(o)[0];
+	a.async=1;
+	a.src=g;
+	m.parentNode.insertBefore(a,m)})(window,
+	                                 document,
+									 "script",
+									 "https://www.google-analytics.com/analytics.js",
+									 "ga");
+	ga("create", "UA-39489988-1", {"cookieDomain":"auto"});
+	ga("set", "anonymizeIp", true);
+	ga("send", "pageview");
+</script>
 
+</head>
 <body>
 <div id="map"></div>
 
@@ -104,10 +120,11 @@
 	<h1>MPO</h1>
 </div>
 
+
 <!-- Desktop nav --> 
 <div class="col-md-6 desktop-nav">
 	<div class="col-md-11">
-		<div class="page_link"><a href="pages/crashes/index2.php" title="Go to crashes page" id="crashes">
+		<div class="page_link"><a href="pages/crashes/index2.php" title="Go to Crashes page" id="crashes">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Crashes </div>
 			<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2014">
@@ -117,7 +134,7 @@
 		</div>
 		<!-- End Crashes --> 
 
-		<div class="page_link"><a href="pages/congestion/index.php" title="Go to congestion page" id="congestion" >
+		<div class="page_link"><a href="pages/congestion/index.php" title="Go to Congestion page" id="congestion" >
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Congestion </div>
 					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2012; metric used - AM Speed Index">				
@@ -132,7 +149,7 @@
 		</div> 
 		<!-- End Congestion --> 
 
-		<div class="page_link"><a href="pages/bridges/index.php" title="Go to bridges page" id="bridges">
+		<div class="page_link"><a href="pages/bridges/index.php" title="Go to Bridges page" id="bridges">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Bridges</div>
 			<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2016">
@@ -145,7 +162,7 @@
 		</div>
 		<!-- End Bridges --> 
 
-		<div class="page_link"><a href="pages/pavement/index.php" title="Go to pavement condition page" id="pavement">
+		<div class="page_link"><a href="pages/pavement/index.php" title="Go to Pavement Condition page" id="pavement">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Pavement Condition</div>
 					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2014">
@@ -159,7 +176,7 @@
 		</div>
 		<!-- End Pavement --> 
 
-		<div class="page_link"><a href="pages/sidewalks/index.php" title="Go to sidewalks page" id="sidewalks">
+		<div class="page_link"><a href="pages/sidewalks/index.php" title="Go to Sidewalks page" id="sidewalks">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Sidewalks</div>
 					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2015">
@@ -172,7 +189,7 @@
 		</div>
 		<!-- End Sidewalk --> 
 
-		<div class="page_link"><a href="pages/bike_facilities/index.php" title="Go to bicycle facilities page" id="bikes">
+		<div class="page_link"><a href="pages/bike_facilities/index.php" title="Go to Bicycle Facilities page" id="bikes">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Bicycle Facilities</div>
 					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2016">
@@ -184,7 +201,7 @@
 		</div>
 		<!-- End Bicycles--> 
 		
-		<div class="page_link"><a href="pages/demographics/index.php" title="Go to demographics page" id="demographics">
+		<div class="page_link"><a href="pages/demographics/index.php" title="Go to Demographics page" id="demographics">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Demographics </div>
 					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Minority data from 2010; median household income data, vehicles per household data, unemployment data from 2010-2014 ACS">
@@ -196,19 +213,29 @@
 		</div>
 		<!-- End Demographics --> 
 
-		<div class="page_link"><a href="pages/about/index.php" title="Go to about page" id="about">
+		<div class="page_link"><a href="pages/about/index.php" title="Go to About page" id="about">
 			<div class="col-md-12 nav_metric">
 				<i class="fa fa-info-circle" aria-hidden="true"></i> About </div>
 				<div class="col-md-6">
-				<p>Purpose, data sources, data development methodology</p></div>
+				<p>Purpose, data sources, and data development methodology</p></div>
 			</a>
 		</div>
 		<!-- End About --> 
+        
+        <div id="bottom_blurb">
+            <div class="col-md-12">
+                <p>
+                The performance measures shown in this dashboard were selected by MPO staff and differ from those that states, 
+                MPOs, and transit agencies must monitor to meet federal requirements. 
+                For more information, see the <a href="pages/about/index.php">About</a> page.
+                </p>
+            </div>
+        </div>
 
 	</div>
 </div>
 <div class="footer">
-	<p> Background is a mapping of the Hispanic population in the Boston MPO region (data from 2010 Census). </p>
+	<p> Background is a map of the Hispanic population in the Boston Region MPO area based on data from the 2010 Census. </p>
 	<?php include 'components/footer.php';?>
 </div>
 </body>
