@@ -42,21 +42,39 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 		<?php include '../../components/top-nav.php';?>
 	</div> 
 <div id="header" class="col-md-10 col-md-offset-1">
-	
 
 	<h1>Crashes</h1>
-
-	<p>One of the MPO’s goals is to improve safety on the highway system.  <b>That being said, highway crashes claimed the lives of 124 people in the Boston region in 2014.</b> For this reason, we track <b>injuries</b> and <b>fatalities</b> from crashes throughout the region to monitor the safety of the Boston region’s transportation network and use this information to prioritize future investments in the system. </p>
+	
+	<p>One of the MPO’s goals is to improve safety on the roadway network. 
+	For this reason, MPO staff track injuries and fatalities from crashes throughout the region 
+	to monitor the safety of the Boston region’s transportation network, and use this information to prioritize future investments in the system.
+	</p>
+	
+	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2005 to 2014. 
+	 For more information about these safety performance measures and related data, visit the Crashes section on the About page.
+	</p>
 
 	<h2> Injuries to Bicyclists and Pedestrians</h2>
+	
 	<h3>Trends</h3>
-		<p> Click in the map on a city or town and the number of crashes involving injuries to bicyclists and pedestrians over the last ten years will appear in the charts to the right. Hover over a city or town to see 2014 statistics on total crashes, injuries, and fatalities.</p> 
+	
+		<p>Click in the map on a city or town, and the number of crashes involving injuries to bicyclists and pedestrians over the last 10 years 
+		   will appear in the charts to the right. 
+		   Hover over a city or town to see 2014 statistics on total crashes, injuries, and fatalities.
+		</p>
+	
+		
 		<div id="map" class="col-md-4"></div>
 		<div id="bikeChart" class="col-md-4 key"><h4>Bicyclist Injuries </h4></div>
 		<div id="pedChart" class = "col-md-4 key"><h4>Pedestrian Injuries</h4></div>
 
 	<h3> One Year of Crashes</h3>
-	<p> During 2014, five people died and 604 were injured while riding bicycles in the Boston region, and 30 pedestrians died and 1,046 pedestrians were injured while walking on roads in the region. Each dot below represents one bicyclist or pedestrian who died or suffered an injury as a result of a motorized crash. </p>
+	
+	<p>During 2014, five people died and 604 were injured while riding bicycles in the Boston region, and 30 pedestrians died
+	   and 1,046 pedestrians were injured while walking on roads in the region. 
+	   Each dot below represents a person walking or bicycling who died or suffered an injury as a result of a motorized crash.
+	</p>
+	
 		<div class="col-md-12 key">
 			<p><i class="fa fa-circle-o bicycle" aria-hidden="true"></i> Bicycle Injuries
 			<i class="fa fa-circle bicycle" aria-hidden="true"></i> Bicycle Fatalities

@@ -195,16 +195,16 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	var yAxisHD = d3.axisRight(yScaleHD);
 
 	timeline.append("text")
-		.attr("x", -350)
+		.attr("x", -370)
 		.attr("y", 20)
 		.attr("transform", "rotate(-90)")
-		.text("Percent of Bridge Deck Area")
+		.text("Percent of NHS Bridge Deck Area")
 
     timeline.append("text")
-		.attr("x", 180)
+		.attr("x", 160)
 		.attr("y", -440)
 		.attr("transform", "rotate(-270)")
-		.text("Average Health Index")
+		.text("Average Bridge Health Index")
 
 	timeline.append("g").attr("class", "axis")
 		.attr("transform", "translate(0, 450)")
@@ -312,14 +312,14 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 590)
-			.text("% structurally deficient")
+			.text("Percent of structurally deficient")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 603)
-			.text("bridge deck area")
+			.text("NHS bridge deck area")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 
@@ -334,7 +334,7 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	timeline.append("text")
 			.attr("x", xPos + 150)
 			.attr("y", 550)
-			.text("% non-structurally deficient")
+			.text("Percent of non-structurally deficient")
 			.style("font-weight", 300)
 			.style("font-size", 12)
 
@@ -451,10 +451,10 @@ CTPS.demoApp.generateBridgeDeckArea = function(bridges) {
 	}
 
 	timeline2.append("text")
-		.attr("x", -320)
+		.attr("x", -370)
 		.attr("y", 10)
 		.attr("transform", "rotate(-90)")
-		.text("Bridge Health Index")
+		.text("Bridge Health Index for NBI bridges")
 
 	var xPos = 20; 
 	//Key

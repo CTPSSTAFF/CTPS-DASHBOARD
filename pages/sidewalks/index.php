@@ -41,13 +41,26 @@
 	
 
 	<h1>Sidewalks</h1>
-	<p>Walking is the most basic form of transportation, and pedestrian infrastructure benefits everyone. Many people walk to get to school, work, doctors’ appointments, the grocery store, and other important destinations because they do not have access to a car or even a bicycle. In areas with public transit, people walk to access transit stops. Even trips taken by car usually begin and end with a short walk.  People who need mobility assistance also require pedestrian infrastructure that facilitates safe travel. Fortunately, well-designed sidewalks accommodate everyone.</p>
-
-	<p>Sidewalks offer a wide variety of benefits. The presence and accessibility of sidewalks allows people to incorporate walking into everyday life, which makes people more active and healthy. Sidewalks make it possible for people to swap car trips for walking excursions, which improves air quality by reducing vehicle emissions. Sidewalks draw more people to the street, which leads to vibrant commerce, crime reduction, and more neighborly communities. Simply put, safe and convenient pedestrian infrastructure underpins our quality of life. The Boston Region MPO recognizes the importance of pedestrian infrastructure in our shared transportation system and regularly quantifies and assesses this infrastructure in the Boston region. </p>
-
+	
+	<p>Safe and convenient pedestrian infrastructure underpins our quality of life. 
+	   The presence and accessibility of sidewalks allows people to incorporate walking into everyday life, 
+	   which helps people to be more active and to replace car trips with walking trips. This in turn improves air quality by reducing vehicle emissions. 
+	   Sidewalks draw more people to the street, which leads to vibrant commerce, crime reduction, and more neighborly communities. 
+	   The Boston Region MPO recognizes the importance of pedestrian infrastructure in our shared transportation system and regularly quantifies and assesses
+	   this infrastructure in the Boston region.
+	</p>
+	
 	<h3> Sidewalk Coverage </h3>
-	<p> The graphic below displays the miles of roadways that have a sidewalk on at least one shoulder, identified as “sidewalk per centerline mile” of roadway. This measure is the ratio of a municipality’s roadways that include a sidewalk on at least one side, divided by the total length of roadways within the boundaries of the municipality. The “sidewalk per centerline mile” measure is provided for every municipality over the past decade. The size of the outer circles and inner circles are proportional to each municipality’s miles of roadway (“centerline miles”) and miles of sidewalk, respectively. Hover over a circle to discover how many miles it represents.</p>
-
+	
+	<p>The graphic below displays the miles of roadways that have a sidewalk on at least one shoulder, identified as “sidewalk per centerline mile” of roadway. 
+	   This measure is the ratio of a municipality’s roadways that include a sidewalk on at least one side, divided by the total length of roadways within
+	   the boundaries of the municipality. 
+	   The “sidewalk per centerline mile” measure is provided for every municipality from 2007 to 2014. 
+	   The size of the outer circles and inner circles are proportional to each municipality’s miles of roadway (“centerline miles”) and miles of sidewalk,
+	   respectively. 
+	   Hover over a circle to discover how many miles it represents.
+	</p>
+	
 		<button class="bigbutton col-md-6" id="alphabetize" alt="Sort towns by alphabetical order" autofocus>Sort by Alphabetical Order</button> 
 		<button class="bigbutton col-md-6" id="byAverages" alt="Sort towns by ascending average PSI">Sort by Sidewalk Miles to Centerline Miles Ratio</button>
 		<button class='allyrs yrpicker col-md-1' autofocus> All</button>

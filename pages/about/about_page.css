@@ -1,0 +1,6 @@
+/* Some extra styling rules for ordered lists on the About page. */
+
+ol.lower_roman {list-style-type: lower-roman;}
+ol.upper_roman {list-style-type: upper-roman;}
+ol.lower_alpha {list-style-type: lower-alpha;}
+ol.upper_alpha {list-style-type: upper-alpha;}
