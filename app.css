@@ -1,0 +1,214 @@
+* {
+  transform-origin: inherit ;
+}
+
+body {
+  background: #ddd;
+  margin-left: 100px;
+  margin-right: 100px;
+  font-family: "Open Sans";
+}
+
+div {
+  position: relative;
+}
+
+h1, h2, h3, h4, p { 
+  color: #191919;
+  font-family: "Raleway";
+
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+p { 
+  font-size: 11px;
+  font-weight: 300;
+  font-family: "Open Sans";
+}
+
+text { 
+  font-size: 11px;
+  font-family: "Open Sans";
+}
+
+.years ul {
+    border: 1px solid #eee;
+    width: 160px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+
+.years li {
+    margin: 5px;
+    border: 1px solid #191919;
+    border-radius: 5px;
+    padding: 2px 15px 2px 15px;
+    width: 150px;
+}
+
+.years li:hover, .years li:focus {
+    cursor: grab;
+    background: #191919;
+    color: #ddd;
+    font-weight: 700;
+}
+
+form input {
+    margin-left: 20px !important;
+    margin-right: 5px !important;
+}
+
+span {
+  font-size: 9px;
+}
+
+#worksheet { 
+  height: 600px;
+  overflow-y: scroll;
+  margin-bottom: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0, .2); 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0, .4); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0, .8); 
+}
+
+#multiyear { 
+  height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0, .2); 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0, .4); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0, .8); 
+}
+
+.d3-tip {
+  line-height: 1;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-weight: 100;
+  font-size: 12px;
+  border-radius: 2px;
+  z-index: 999;
+}
+
+.d3-tip > p{
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.d3-tip-inflation {
+  line-height: 1;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: black;
+  font-weight: 100;
+  font-size: 12px;
+  border-radius: 2px;
+  z-index: 999;
+}
+
+.d3-tip-inflation > p{
+  color: black;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.dropdown {
+  float: right;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#save {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
