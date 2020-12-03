@@ -3,6 +3,8 @@
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO.
 // Contact: bkrepp@ctps.org
+// Note that this version re-uses the TopoJSON generated from 2014 congestion data resident in an Oracle database.
+// Property names are consequently in UPPER CASE.
 //
 var CTPS = {};
 CTPS.demoApp = {};
@@ -17,12 +19,13 @@ var colorScale = d3.scaleThreshold()
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	.defer(d3.json, "../../data/json/CMP_2014_ART_ROUTES_EXT_MPO.geo.json")
+	.defer(d3.json, "../../data/json/CTPS_CMP_2015_ART_ROUTES_EXT_augmented_v4.geo.json")
 	.defer(d3.csv, "../../data/csv/arterial_route_id_table.csv")
 	.awaitAll(function(error, results){ 
-		CTPS.demoApp.generateMap(results[0],results[1], results[2]);
-		//CTPS.demoApp.generateChart(results[1]);
-		//CTPS.demoApp.generateTraveller(results[0], results[1]);
+		var mpo_towns = results[0],
+		    arterialTmcs = results[1],
+			arterial_route_ids = results[2];
+		CTPS.demoApp.generateMap(mpo_towns, arterialTmcs, arterial_route_ids);
 	}); 
 	//CTPS.demoApp.generateViz);
 
@@ -30,8 +33,25 @@ d3.queue()
 CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {	
 	// Show name of MAPC Sub Region
 	// Define Zoom Behavior
-	// var arterialRoads = topojson.feature(arterials, arterials.objects.CMP_2014_ART_ROUTES_EXT_MPO).features;
 	var arterialRoads = arterials.features;
+	
+	// Instrumentation
+/*
+	arterialRoads.forEach(function(feature) {
+		// var str = feature.properties['tmc'] + ',' + feature.properties['normalizedstart'];
+		var str = feature.properties['tmc'] + ',' + feature.properties['rte_name_id'];
+		console.log(str);
+	});
+*/
+
+	// Workaround : Convert any NULL rte_name_id properties to the empty string. -- BK 12/03/2020
+	arterialRoads.forEach(function(feature) {
+		if (feature.properties['rte_name_id'] == undefined ||feature.properties['rte_name_id'] == null) {
+			feature.properties['rte_name_id'] = '';
+			// console.log("tmc " + feature.properties['tmc'] + " is NOT COOL!");
+		}
+	});
+
 
 	var projScale = 45000,
 		projXPos = 100,
@@ -69,7 +89,7 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 	  .attr('class', 'd3-tip')
 	  .offset([0, 150])
 	  .html(function(d) {
-	    return "<p><b>" + d.properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")) + "</b></p><br>Speed Limit: " + d.properties.SPD_LIMIT + "<br>Speed Index: " + e(d.properties.AM_SPD_IX);
+	    return "<p><b>" + d.properties.rte_name_id.substring(0, d.properties.rte_name_id.lastIndexOf(" ")) + "</b></p><br>Speed Limit: " + d.properties.spd_limit + "<br>Speed Index: " + e(d.properties.am_spd_ix);
 	  })
 
 	svgContainer.call(tip); 
@@ -92,25 +112,25 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 		.enter()
 		.append("path")
 			.attr("class", function(d) { 
-				if (parseInt(d.properties.RID)%2 == 1) { 
-					var twoBarrels = d.properties.RID + 1; 
+				if (parseInt(d.properties.rid)%2 == 1) { 
+					var twoBarrels = d.properties.rid + 1; 
 				} else {
-					var twoBarrels = d.properties.RID;
+					var twoBarrels = d.properties.rid;
 				}
-				return "interstate mapsegment" + twoBarrels + " " + d.properties.RTE_NAME.replace(/\//g, '-').replace(' ', '-') + "-" + d.properties.ROAD_NAME.replace('/', 'or').split(' ').join('-');})
+				return "interstate mapsegment" + twoBarrels + " " + d.properties.rte_name.replace(/\//g, '-').replace(' ', '-') + "-" + d.properties.road_name.replace('/', 'or').split(' ').join('-');})
 			.attr("d", function(d, i) { 
-				if (d.properties.DIRECTION == "Northbound" || d.properties.DIRECTION == "Eastbound") { 
+				if (d.properties.direction == "Northbound" || d.properties.direction == "Eastbound") { 
 					return geoPath(d); 
-				} else if (d.properties.DIRECTION == "Southbound") {
+				} else if (d.properties.direction == "Southbound") {
 					return geoPathS(d);
-				} else if (d.properties.DIRECTION == "Westbound") {
+				} else if (d.properties.direction == "Westbound") {
 					return geoPathW(d);
 				}})
 			.style("fill", "none")
 			.style("stroke-width", 1)
 			.style("stroke-linejoin", "round")
 			.style("stroke", function(d) { 
-				return colorScale(d.properties.AM_SPD_IX);
+				return colorScale(d.properties.am_spd_ix);
 			})
 			.style("opacity", .2)
 		.on("mouseenter", function(d) {
@@ -161,7 +181,7 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 	function crossSection(d) { 
 		var crossGraph = [];
 		arterialRoads.forEach(function(i){
-			if (d.properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")) == i.properties.RTE_NAME_ID.substring(0, i.properties.RTE_NAME_ID.lastIndexOf(" "))) {
+			if (d.properties.rte_name_id.substring(0, d.properties.rte_name_id.lastIndexOf(" ")) == i.properties.rte_name_id.substring(0, i.properties.rte_name_id.lastIndexOf(" "))) {
 				crossGraph.push(i);
 			}
 		})
@@ -169,9 +189,9 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 		var maxmins = []; 
 		var directions = 0; 
 		crossGraph.forEach(function(j){
-			maxmins.push(j.properties.NORMALIZEDSTART + Math.abs(d.properties.TO_MEAS - d.properties.FROM_MEAS))
-			maxmins.push(j.properties.NORMALIZEDSTART);
-			if (j.properties.DIRECTION == "Northbound" || j.properties.DIRECTION == "Southbound") { directions++; }
+			maxmins.push(j.properties.normalizedstart + Math.abs(d.properties.to_meas - d.properties.from_meas))
+			maxmins.push(j.properties.normalizedstart);
+			if (j.properties.direction == "Northbound" || j.properties.direction == "Southbound") { directions++; }
 		})
 
 		var yScale = d3.scaleLinear().domain([0, d3.max(maxmins)]).range([685, 80]);
@@ -184,7 +204,7 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 		  .attr('class', 'd3-tip')
 		  .offset([0, -10])
 		  .html(function(d) {
-		    return "<b>" + d.properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")) + "</b><br><br>Speed Limit: " + d.properties.SPD_LIMIT + "<br>Speed Index: " + e(d.properties.AM_SPD_IX);
+		    return "<b>" + d.properties.rte_name_id.substring(0, d.properties.rte_name_id.lastIndexOf(" ")) + "</b><br><br>Speed Limit: " + d.properties.spd_limit + "<br>Speed Index: " + e(d.properties.am_spd_ix);
 		  })
 
 		svgContainer.call(tip2); 
@@ -204,7 +224,7 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 			.style("text-anchor", "middle")
 
 		roadWindow.append("text")
-			.html(crossGraph[0].properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")))
+			.html(crossGraph[0].properties.rte_name_id.substring(0, d.properties.rte_name_id.lastIndexOf(" ")))
 			.attr("x", 100)
 			.attr("y", 50)
 			.style("text-anchor", "middle")
@@ -215,15 +235,15 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 			.append("rect")
 				.attr("class", "crossSectionAM")
 				.attr("width", 15)
-				.attr("height", function(d) { return ySegment(Math.abs(d.properties.TO_MEAS - d.properties.FROM_MEAS)); })
+				.attr("height", function(d) { return ySegment(Math.abs(d.properties.to_meas - d.properties.from_meas)); })
 				.attr("x", function(d) { 
-					if (d.properties.DIRECTION == "Northbound" || d.properties.DIRECTION == "Eastbound") {
+					if (d.properties.direction == "Northbound" || d.properties.direction == "Eastbound") {
 						return 80;
 					} else {
 						return 100;
 					}})
-				.attr("y", function(d) { return yScale(d.properties.NORMALIZEDSTART); })
-				.style("fill", function(d) { return colorScale(d.properties.AM_SPD_IX)})
+				.attr("y", function(d) { return yScale(d.properties.normalizedstart); })
+				.style("fill", function(d) { return colorScale(d.properties.am_spd_ix)})
 				.on("mouseenter", function(d) {
 					d3.select(this).style("stroke", "white")
 					tip2.show(d); 
@@ -239,21 +259,21 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 			.append("text")
 				.attr("class", "textlabels")
 				.text(function(d) { 
-					if (Math.abs(d.properties.TO_MEAS - d.properties.FROM_MEAS) < 1000) { return ""}
-					else if (d.properties.SEG_END == "NULL") { return ""}
-					else { return d.properties.SEG_END;}})
+					if (Math.abs(d.properties.to_meas - d.properties.from_meas) < 1000) { return ""}
+					else if (d.properties.seg_end == "NULL") { return ""}
+					else { return d.properties.seg_end;}})
 				.attr("x", function(d) { 
-					if (d.properties.DIRECTION == "Northbound" || d.properties.DIRECTION == "Eastbound") {
+					if (d.properties.direction == "Northbound" || d.properties.direction == "Eastbound") {
 						return 75;
 					} else {
 						return 120;
 					}})
-				.attr("y", function(d) { return yScale(d.properties.NORMALIZEDSTART) ; })
+				.attr("y", function(d) { return yScale(d.properties.normalizedstart) ; })
 				.style("fill", "#fff")
 				.style("font-size", 10)
 				.style("font-weight", 300)
 				.style("text-anchor", function(d){
-					if (d.properties.DIRECTION == "Northbound" || d.properties.DIRECTION == "Eastbound") {
+					if (d.properties.direction == "Northbound" || d.properties.direction == "Eastbound") {
 						return "end";
 					} else {
 						return "start";
