@@ -3,6 +3,8 @@
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO.
 // Contact: bkrepp@ctps.org
+// Note that this version re-uses the TopoJSON generated from 2014 congestion data resident in an Oracle database.
+// Property names are consequently in UPPER CASE.
 //
 var CTPS = {};
 CTPS.demoApp = {};
@@ -20,9 +22,10 @@ d3.queue()
 	.defer(d3.json, "../../data/json/CMP_2014_ART_ROUTES_EXT_MPO.geo.json")
 	.defer(d3.csv, "../../data/csv/arterial_route_id_table.csv")
 	.awaitAll(function(error, results){ 
-		CTPS.demoApp.generateMap(results[0],results[1], results[2]);
-		//CTPS.demoApp.generateChart(results[1]);
-		//CTPS.demoApp.generateTraveller(results[0], results[1]);
+		var mpo_towns = results[0],
+		    arterialTmcs = results[1],
+			arterial_route_ids = results[2];
+		CTPS.demoApp.generateMap(mpo_towns, arterialTmcs, arterial_route_ids);
 	}); 
 	//CTPS.demoApp.generateViz);
 
@@ -30,7 +33,6 @@ d3.queue()
 CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {	
 	// Show name of MAPC Sub Region
 	// Define Zoom Behavior
-	// var arterialRoads = topojson.feature(arterials, arterials.objects.CMP_2014_ART_ROUTES_EXT_MPO).features;
 	var arterialRoads = arterials.features;
 
 	var projScale = 45000,
@@ -184,7 +186,7 @@ CTPS.demoApp.generateMap = function(cities, arterials, route_ids) {
 		  .attr('class', 'd3-tip')
 		  .offset([0, -10])
 		  .html(function(d) {
-		    return "<b>" + d.properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")) + "</b><br><br>Speed Limit: " + d.properties.SPD_LIMIT + "<br>Speed Index: " + e(d.properties.AM_SPD_IX);
+		    return "<b>" + d.properties.RTE_NAME_ID.substring(0, d.properties.RTE_NAME_ID.lastIndexOf(" ")) + "</b><br><br>Speed Limit: " + d.properties.SPD_LIMIT + "<br>Speed Index: " + e(d.properties.am_spd_ix);
 		  })
 
 		svgContainer.call(tip2); 
