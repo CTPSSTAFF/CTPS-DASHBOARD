@@ -19,7 +19,7 @@ var colorScale = d3.scaleThreshold()
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	.defer(d3.json, "../../data/json/CTPS_CMP_2015_ART_ROUTES_EXT_augmented_v4.geo.json")
+	.defer(d3.json, "../../data/json/CTPS_CMP_2015_ART_ROUTES_EXT_augmented_v5.geo.json")
 	.defer(d3.csv, "../../data/csv/arterial_route_id_table.csv")
 	.awaitAll(function(error, results){ 
 		var mpo_towns = results[0],
