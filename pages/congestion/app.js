@@ -2,10 +2,10 @@
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO, 
-// and migration of backing database to PostgreSQL.
+// migration of backing database to PostgreSQL, and to
+// include 2019 performance data.
 // Contact: bkrepp@ctps.org
 //
-
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
@@ -20,14 +20,10 @@ var colorScale = d3.scaleThreshold()
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	// ** Change here by BK 11/20/2020
-    // .defer(d3.json, "../../data/json/CTPS_CMP_2019_EXP_ROUTES_postgresql.geo.json")
-	.defer(d3.json, "../../data/json/cmp_2015_exp_routes_ext.geo.json")
+	.defer(d3.json, "../../data/json/CTPS_CMP_2019_EXP_ROUTES_dashboard_v2.geo.json")
 	.awaitAll(function(error, results){
 		CTPS.demoApp.generateMap(results[0],results[1]);
 		CTPS.demoApp.generateChart(results[1]);
-		//CTPS.demoApp.generateTimes(results[1]);
-		//CTPS.demoApp.generateTraveller(results[0], results[1]);
 	});
 	//CTPS.demoApp.generateViz);
 
@@ -208,7 +204,6 @@ CTPS.demoApp.generateChart = function(congestion) {
             var rv = (logicalRte.rte == ir.properties.route_num && logicalRte.dir == ir.properties.direction);
             return rv;
         });
-        // Using local vars during dev/debug
         var frommax_seg = _.max(logicalRte_segs, function(seg){ return seg.properties.from_meas; });
         var frommax = frommax_seg.properties.from_meas;
         var tomax_seg = _.max(logicalRte_segs, function(seg){ return seg.properties.to_meas; });
@@ -489,6 +484,4 @@ pmchartContainer.selectAll(".labels")
 			.style("font-weight", 300)
 			.attr("x", xPos + 25).attr("y", yPos + 67)
 			.text("> 0.90");
-
-
 }
