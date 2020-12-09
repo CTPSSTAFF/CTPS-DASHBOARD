@@ -21,11 +21,11 @@ var geoPath = d3.geoPath().projection(projection);
 d3.queue()
   .defer(d3.json, "../../data/json/demographics_population_97.topo.json")
   .awaitAll(function(error, results){ 
-    CTPS.demoApp.generateMap(results[0]); //Population map
-    CTPS.demoApp.generateStats(results[0]);
+    // CTPS.demoApp.generateMap(results[0]); //Population map
+    // CTPS.demoApp.generateStats(results[0]);
 
-    CTPS.demoApp.generateMap_R(results[0]); //Races map
-    CTPS.demoApp.generateStats_R(results[0]);
+    // CTPS.demoApp.generateMap_R(results[0]); //Races map
+    // CTPS.demoApp.generateStats_R(results[0]);
 
     CTPS.demoApp.generateMap_H(results[0]); //Hispanic map
     CTPS.demoApp.generateStats_H(results[0]);
@@ -695,6 +695,7 @@ CTPS.demoApp.generateMap_H = function(tracts) {
                     .style("overflow", "visible")
 
   //D3 Tooltip
+/*
  var tip = d3.tip()
     .attr('class', 'd3-tip')
     .style("font-family", "Open Sans")
@@ -703,6 +704,7 @@ CTPS.demoApp.generateMap_H = function(tracts) {
     })
 
   svgContainer_H.call(tip); 
+*/
 
   var findIndex = function(town, statistic) { 
     for (var i = 0; i < equity.length; i++) { 
@@ -729,6 +731,7 @@ CTPS.demoApp.generateMap_H = function(tracts) {
         })
         .style("fill-opacity", function(d) { return d.properties[percent] * 3 / keyMult * 5; } )
         .style("opacity", 1)
+	/*
         .on("mouseenter", function(d){
           d3.selectAll("." + this.getAttribute("class"))
               .style("stroke-width", 2)
@@ -741,7 +744,9 @@ CTPS.demoApp.generateMap_H = function(tracts) {
               .style("stroke", "#ddd")
          tip.hide(d);
         })
-       
+	*/
+     
+	/*
      //Color key
       var xPos = 5;
       var yPos = 40; 
@@ -788,7 +793,9 @@ CTPS.demoApp.generateMap_H = function(tracts) {
         .style("font-weight", 300)
         .attr("x", xPos + 25).attr("y", yPos + 67)
         .text(">" + 5 * keyMult + "% population");
+	*/ 
     }
+	
 }
 
 CTPS.demoApp.generateStats_H = function(tracts){
