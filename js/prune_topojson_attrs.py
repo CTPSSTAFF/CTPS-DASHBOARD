@@ -1,0 +1,101 @@
+import json
+home_dir = r'c:/Users/ben_k/work_stuff/dashboard/prune_topojson_attrs/'
+fn = 'demographics_population_97.topo.json'
+full_fn = home_dir + fn
+
+fp = open(full_fn)
+j = json.load(fp)
+
+j.keys()
+j['objects'].keys()
+
+len(j['objects']['tract_census_2'])
+j['objects']['tract_census_2'].keys()
+j['objects']['tract_census_2']['type']
+len(j['objects']['tract_census_2']['geometries']) # == 690
+
+# (1) Iterate over all geometries: 0 .. 659:
+['objects']['tract_census_2']['geometries'][0]
+
+j['objects']['tract_census_2']['geometries'][0].keys()
+
+## THE NEXT LINE IS IT!!!
+j['objects']['tract_census_2']['geometries'][0]['properties'].keys()
+
+# (2) And delete all keys *except* HISPANIC_PCT_2010
+
+## The keys are:
+#
+# AFRICAN_AMERICAN_POP_2010
+# LEP_HH
+# VISION_DISABILITY_POP
+# WHITE_PCT_2010
+# POP2010_5_PLUS
+# MEDIAN_HH_INC
+# PACIFIC_ISLANDER_POP_2010
+# AFRICAN_AMERICAN_PCT_2010
+# VIETNAMESE_LEP_POP
+# POP_BELOW_2X_POVERTY_LVL
+# TOTAL_HH_2010
+# MINORITY_PCT
+# PCT_BELOW_2X_POVERTY_LEVEL
+# CHINESE_LEP_POP
+# PACIFIC_ISLANDER_PCT_2010
+# MULTIPLE_RACE_PCT_2010
+# TOTAL_POP_2010
+# PCT_75_PLUS
+# PCT_IN_LABOR_FORCE
+# VIETNAMESE_LEP_PCT
+# TOWN_ID
+# COGNITIVE_DISABILITY_PCT
+# OTHER_RACE_POP_2010
+# HISPANIC_POP_2010
+# NATIVE_AMERICAN_PCT_2010
+# OTHER_RACE_PCT_2010
+# SELF_CARE_DISABILITY_POP
+# ASIAN_PCT_2010
+# INDEP_LIVING_DISABILITY_PCT
+# HEARING_DISABILITY_PCT
+# POP_75_PLUS
+# FRENCH_CREOLE_LEP_POP
+# TRACT
+# LEP_POP
+# SPANISH_LEP_PCT
+# PORTUGUESE_LEP_PCT
+# COUNTY
+# COUSUB
+# STATE
+# SELF_CARE_DISABILITY_PCT
+# NATIVE_AMERICAN_POP_2010
+# COGNITIVE_DISABILITY_POP
+# HEARING_DISABILITY_POP
+# AMBULATORY_DISABILITY_PCT
+# FRENCH_CREOLE_LEP_PCT
+# GEOID
+# ALAND
+# TOWN
+# LAND_AREA
+# POP2010_POVERTY_BASE
+# ASIAN_POP_2010
+# HISPANIC_PCT_2010
+# SPANISH_LEP_POP
+# INDEP_LIVING_DISABILITY_POP
+# LABOR_FORCE
+# AMBULATORY_DISABILITY_POP
+# MINORITY_POP
+# LEP_HH_PCT
+# ANY_DISABILITY_POP
+# PORTUGUESE_LEP_POP
+# LEP_POP_PCT
+# VISION_DISABILITY_PCT
+# POP_65_PLUS
+# MULTIPLE_RACE_POP_2010
+# WHITE_POP_2010
+# CHINESE_LEP_PCT
+# AWATER
+# ANY_DISABILITY_PCT
+# PCT_65_PLUS
+
+
+
+
