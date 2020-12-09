@@ -114,7 +114,7 @@ Note that the Boston Region MPO considers the term “minority” to include all
 
 	<div class="col-md-12">
 	<div class="col-md-5" id="map_hisp"></div>
-	<div class="col-md-7" id="demographics_hisp"></div></div>
+	<div class="col-md-7" id="demographics_hisp" style="height:0px;width:0px;"></div></div>
 
 
 <!--
