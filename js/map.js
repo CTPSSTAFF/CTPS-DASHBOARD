@@ -1,4 +1,5 @@
 //Code written by Beatrice Jin, 2016. Contact at beatricezjin@gmail.com.
+// Modified by Ben Krepp, 2020, to reflect 97-town MPO. Contact: bkrepp@ctps.org.
  $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
     });
@@ -22,7 +23,7 @@ var geoPath = d3.geoPath().projection(projection);
 //Using the d3.queue.js library
 d3.queue()
 	//.defer(d3.json, "data/json/boston_region_mpo_towns.topo.json")
-	.defer(d3.json, "js/tractmap.topojson")
+	.defer(d3.json, "js/tractmap_97towns_pruned_compressed_75pct.topojson")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateMap(results[0]);
 	}); 
