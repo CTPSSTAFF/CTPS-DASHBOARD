@@ -2,7 +2,6 @@
 
 File name | Description | Notes
 ----------|-------------|------
-
 all_bike_faciliites_2011.csv | | 
 arterial_2014_tmc_to_normalizedstart.csv | This table is a list of (TMC,NORMALIZEDSTART) pairs, extracted from ../json/CMP_2014_ART_ROUTES_EXT_MPO.geo.json using the Google Chrome developer console and some post-processing with Vim. It is a step towards creating a version of the 2015 arterial performance data in GeoJSON format that includes NORMALIZEDSTART (and RTE_NAME_ID) attributes. | Probab no longer needed.
 arterial_route_id_table.csv | table to map CMP route ID (RID) to textual route description (ROUTE) | 
