@@ -1,10 +1,13 @@
 // JS code for congestion visualization for arterial highways.
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
-// Modified by Ben Krepp to reflect change to 97-town MPO.
+// Modified by Ben Krepp to reflect change to 97-town MPO,
+// and to incorporate 2015 CMP arterial congestion data.
 // Contact: bkrepp@ctps.org
-// Note that this version re-uses the TopoJSON generated from 2014 congestion data resident in an Oracle database.
-// Property names are consequently in UPPER CASE.
+// Note that this version re-uses the TopoJSON _geometry_ and property names 
+// from the 2014 arterial congestion data, which was resident in an Oracle database.
+// (Consequently, the property names are in UPPER CASE.)
+// The performance metrics, i.e., the _values_ of the properties, however are for 2015.
 //
 var CTPS = {};
 CTPS.demoApp = {};
