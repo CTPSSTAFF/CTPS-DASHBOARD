@@ -173,7 +173,9 @@
 		
 		<h2> Congestion </h2>
 		
-		<p>Congestion data are from a 2015 INRIX data set, which the MPO uses to support its Congestion Management Process (CMP). 
+		<p>Congestion data for express highways are from a 2019 INRIX data set;
+           congestion data for arterial highways are from a 2015 INRIX data set.
+		   The MPO uses these data sets to support its Congestion Management Process (CMP). 
 		   These data can be found in the Central Transportation Planning Staff’s data catalogue on the 
 		   Boston Region MPO’s website, <a href="https://bostonmpo.org/data-catalog"  target="_blank">bostonmpo.org/datacatalog</a>. 
 		   Data from the Boston Region MPO area were selected and exported in GeoJSON format. 
