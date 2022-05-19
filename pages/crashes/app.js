@@ -1,13 +1,17 @@
 // JS code for visualization of non-motorized crash data.
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
-// Modified by Ben Krepp to reflect change to 97-town MPO.
+// Modified by Ben Krepp in 2019 to reflect change to 97-town MPO.
+// Modified by Ben Krepp in 2022 to reflect use of data from 2010-2019.
 // Contact: bkrepp@ctps.org
 //
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(".2")
 var e = d3.format(".1f");
+
+var firstDataYr = 2010, // First and last years of (10-year) range for which we have data.
+    lastDataYr  = 2019; 
 
 var projection = d3.geoConicConformal()
 	.parallels([41 + 43 / 60, 42 + 41 / 60])
@@ -44,7 +48,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 	  .offset([-10, 0])
 	  .html(function(d) {
 		var town = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-	    return "<p>" + town + "</p><b>2014 Statistics</b><br>Bike Injuries: " + findIndex(town, "bike_inj") + "<br>Bike Fatalities: " + findIndex(town, "bike_fat") + 
+	    return "<p>" + town + "</p><b>2019 Statistics</b><br>Bike Injuries: " + findIndex(town, "bike_inj") + "<br>Bike Fatalities: " + findIndex(town, "bike_fat") + 
 	    "<br>Pedestrian Injuries: " + findIndex(town, "ped_inj") + "<br>Pedestrian Fatalities: " + findIndex(town, "ped_fat") + "<br><br> Total Bicycle Crashes: " + 
 	    findIndex(town, "bike_tot") + "<br> Total Pedestrian Crashes: " + findIndex(town, "ped_tot");
 	  })
@@ -57,7 +61,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 
 	var findIndex = function(town, statistic) { 
 		for (var i = 0; i < crashdata.length; i++) { 
-			if (crashdata[i].year == 2014 && crashdata[i].town == town) {
+			if (crashdata[i].year == 2019 && crashdata[i].town == town) {
 				return crashdata[i][statistic]; 
 			} 
 		}
@@ -164,7 +168,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 		.text("Pedestrian Injuries Over Time")
 
 //Assign scales and axes 
-	var xScale = d3.scaleLinear().domain([2005, 2014]).range([50, 300]);
+	var xScale = d3.scaleLinear().domain([2010, 2019]).range([50, 300]);
 	var yScale = d3.scaleLinear().domain([0, findTownMax("Total")[0]]).range([400, 20]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -248,7 +252,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 	svgContainer.append("text")
       .style("font-weight", 700).style("font-size", 18)
       .attr("x", xPos).attr("y", yPos - 35)
-      .text("Crashes - 2014");
+      .text("Crashes - 2019");
 
 
     svgContainer.append("text")
@@ -339,7 +343,7 @@ CTPS.demoApp.generatePlot = function (crashdata) {
 				}});
 
 		town.values.forEach(function(d){
-			if (d.year == 2014 && d.town != "Total") { 
+			if (d.year == 2019 && d.town != "Total") { 
 				var x = 1; 
 				var y = yMax - 1; 
 				for(var i = 1; i < +d.bike_inj+1; i++) { 
