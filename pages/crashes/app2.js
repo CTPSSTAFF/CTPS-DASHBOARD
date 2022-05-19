@@ -1,13 +1,17 @@
 // JS code for visualization of motorized crash data.
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
-// Modified by Ben Krepp to reflect change to 97-town MPO.
+// Modified by Ben Krepp in 2019 to reflect change to 97-town MPO.
+// Modified by Ben Krepp in 2022 to reflect use of data from 2010-2019.
 // Contact: bkrepp@ctps.org
 //
 var CTPS = {};
 CTPS.demoApp = {};
 var f = d3.format(",")
 var e = d3.format(".1f");
+
+var firstDataYr = 2010, // First and last years of (10-year) range for which we have data.
+    lastDataYr  = 2019; 
 
 var projection = d3.geoConicConformal()
 	.parallels([41 + 43 / 60, 42 + 41 / 60])
@@ -28,7 +32,6 @@ d3.queue()
 d3.queue()
 	.defer(d3.csv, "../../data/csv/motorized_crashes_97towns.csv")
 	.awaitAll(function(error, results){ 
-		//CTPS.demoApp.generatePlot(results[0]);
 		CTPS.demoApp.generateTruck(results[0]);
 		CTPS.demoApp.generateAccessibleTable(results[0]);
 	});
@@ -40,6 +43,8 @@ var colorScale = d3.scaleThreshold()
 
 ////////////////* GENERATE MAP *////////////////////
 CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {	
+	var __DEBUG_HOOK = 42;
+	
 	// SVG Viewport
 	var tip = d3.tip()
 	  .attr('class', 'd3-tip')
@@ -47,7 +52,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 	  .html(function(d) {
 		var town = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	    var total = +findIndex(town, "mot_tot");
-	    return "<p>" + town + "</p><b>2014 Statistics</b><br>Motorized Injuries: " + f(findIndex(town, "mot_inj")) + "<br>Motorized Fatalities: " + findIndex(town, "mot_fat") + 
+	    return "<p>" + town + "</p><b>" + lastDataYr + " Statistics</b><br>Motorized Injuries: " + f(findIndex(town, "mot_inj")) + "<br>Motorized Fatalities: " + findIndex(town, "mot_fat") + 
 	    "<br>Truck Injuries: " + findIndex(town, "trk_inj") + "<br>Truck Fatalities: " + findIndex(town, "trk_fat") + "<br><br>Total Motorized Crashes: " + f(total);
 	  })
 
@@ -59,7 +64,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 
 	var findIndex = function(town, statistic) { 
 		for (var i = 0; i < crashdata.length; i++) { 
-			if (crashdata[i].year == 2014 && crashdata[i].town == town) {
+			if (crashdata[i].year == lastDataYr && crashdata[i].town == town) {
 				return +crashdata[i][statistic]; 
 			} 
 		}
@@ -73,7 +78,8 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 			.attr("d", function(d, i) {return geoPath(d); })
 			.style("fill", function(d){ 
 				var capTown = d.properties.town.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-				return colorScale(findIndex(capTown, "mot_tot")); 	
+				cs = colorScale(findIndex(capTown, "mot_tot"));
+				return cs;
 			})
 			.style("opacity", 1)
 			.style("stroke", "#191b1d")
@@ -164,7 +170,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 		.text("Injuries Involving Trucks")
 
 //Assign scales and axes 
-	var xScale = d3.scaleLinear().domain([2005, 2014]).range([60, 300]);
+	var xScale = d3.scaleLinear().domain([firstDataYr, lastDataYr]).range([60, 300]);
 	var yScale = d3.scaleLinear().domain([0, findTownMax("Total")[0]]).range([400, 20]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -246,7 +252,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
     svgContainer.append("text")
       .style("font-weight", 700).style("font-size", 18)
       .attr("x", xPos).attr("y", yPos - 35)
-      .text("Total Motorized Crashes - 2014");
+      .text("Total Motorized Crashes - 2019");
 
     //background
     svgContainer.append("text")
@@ -323,7 +329,7 @@ CTPS.demoApp.generatePlot = function (crashdata) {
 		.call(yAxis).selectAll("text").remove();
 
 	crashdata.forEach(function(d){
-		if (d.year == 2014 && d.town == "Total") { 
+		if (d.year == 2019 && d.town == "Total") { 
 			var x = 1; 
 			var y = 130; 
 			
@@ -368,7 +374,7 @@ CTPS.demoApp.generateTruck = function(crashdata) {
 				.attr("height", height)
 				.attr("width", width);
 
-	var xScale = d3.scaleLinear().domain([2005, 2014]).range([0 + padding, width - (2.5 * padding)]);
+	var xScale = d3.scaleLinear().domain([firstDataYr, lastDataYr]).range([0 + padding, width - (2.5 * padding)]);
 	var yScale = d3.scaleLinear().domain([90, 0]).range([height-60, -10]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -453,7 +459,7 @@ CTPS.demoApp.generateAccessibleTable = function(crashjson){
 
 	var options = {
 		"divId" : "crashTableDiv",
-		"caption": "Motorized Crash Data over Time: Motorized Vehicles and Truck Injuries and Fatalities from 2005 to 2014",
+		"caption": "Motorized Crash Data over Time: Motorized Vehicles and Truck Injuries and Fatalities from 2010 to 2019.",
 	};
 
 	$("#crashTable").accessibleGrid(colDesc, options, crashjson);
