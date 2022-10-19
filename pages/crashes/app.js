@@ -2,7 +2,7 @@
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO.
-// Modified by Ben Krepp to incorporate 2019-2018 data.
+// Modified by Ben Krepp to incorporate 2010-2019 data.
 // Contact: bkrepp@ctps.org
 //
 var CTPS = {};
@@ -251,7 +251,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 	svgContainer.append("text")
       .style("font-weight", 700).style("font-size", 18)
       .attr("x", xPos).attr("y", yPos - 35)
-      .text("Crashes - 2014");
+      .text("Crashes - 2019");
 
 
     svgContainer.append("text")
@@ -342,7 +342,8 @@ CTPS.demoApp.generatePlot = function (crashdata) {
 				}});
 
 		town.values.forEach(function(d){
-			if (d.year == 2014 && d.town != "Total") { 
+			// Change: d.year == 2014 to d.year == 2019
+			if (d.year == 2019 && d.town != "Total") { 
 				var x = 1; 
 				var y = yMax - 1; 
 				for(var i = 1; i < +d.bike_inj+1; i++) { 
