@@ -127,10 +127,10 @@
 		<div class="page_link"><a href="pages/crashes/index2.php" title="Go to Crashes page" id="crashes">
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Crashes </div>
-			<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2014">
-				<p> Motorized injuries/deaths <br><b>16,869/124</b></p></div>
+			<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2019">
+				<p> Motorized injuries/deaths <br><b>16,104/106</b></p></div>
 			<div class="col-md-6">
-				<p> Non-motorized injuries/deaths<br><b>1,660/35</b></p></div></a>
+				<p> Non-motorized injuries/deaths<br><b>1,463/33</b></p></div></a>
 		</div>
 		<!-- End Crashes --> 
 
