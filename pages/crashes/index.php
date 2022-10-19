@@ -50,7 +50,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	to monitor the safety of the Boston region’s transportation network, and use this information to prioritize future investments in the system.
 	</p>
 	
-	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2010 to 2019. 
+	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2011 to 2019. 
 	 For more information about these safety performance measures and related data, visit the Crashes section on the About page.
 	</p>
 
@@ -58,7 +58,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	
 	<h3>Trends</h3>
 	
-		<p>Click in the map on a city or town, and the number of crashes involving injuries to bicyclists and pedestrians over the last 10 years 
+		<p>Click in the map on a city or town, and the number of crashes involving injuries to bicyclists and pedestrians over the last 9 years 
 		   will appear in the charts to the right. 
 		   Hover over a city or town to see 2019 statistics on total crashes, injuries, and fatalities.
 		</p>

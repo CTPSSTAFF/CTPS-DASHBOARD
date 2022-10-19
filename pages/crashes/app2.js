@@ -2,6 +2,7 @@
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO.
+// Modified by Ben Krepp to incorporate 2011-2019 data.
 // Contact: bkrepp@ctps.org
 //
 var CTPS = {};
@@ -20,13 +21,13 @@ var geoPath = d3.geoPath().projection(projection);
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	.defer(d3.csv, "../../data/csv/mv_crash_2010_2019.csv")
+	.defer(d3.csv, "../../data/csv/mv_crash_2011_2019.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateMap(results[0],results[1]);		
 	}); 
 
 d3.queue()
-	.defer(d3.csv, "../../data/csv/mv_crash_2010_2019.csv")
+	.defer(d3.csv, "../../data/csv/mv_crash_2011_2019.csv")
 	.awaitAll(function(error, results){ 
 		//CTPS.demoApp.generatePlot(results[0]);
 		CTPS.demoApp.generateTruck(results[0]);
@@ -166,7 +167,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 
 //Assign scales and axes 
 	// var xScale = d3.scaleLinear().domain([2005, 2014]).range([60, 300]);
-	var xScale = d3.scaleLinear().domain([2010, 2019]).range([60, 300]);
+	var xScale = d3.scaleLinear().domain([2011, 2019]).range([60, 300]);
 	var yScale = d3.scaleLinear().domain([0, findTownMax("Total")[0]]).range([400, 20]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -371,7 +372,7 @@ CTPS.demoApp.generateTruck = function(crashdata) {
 				.attr("width", width);
 
 	// var xScale = d3.scaleLinear().domain([2005, 2014]).range([0 + padding, width - (2.5 * padding)]);
-	var xScale = d3.scaleLinear().domain([2010, 2019]).range([0 + padding, width - (2.5 * padding)]);
+	var xScale = d3.scaleLinear().domain([2011, 2019]).range([0 + padding, width - (2.5 * padding)]);
 	var yScale = d3.scaleLinear().domain([90, 0]).range([height-60, -10]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -456,7 +457,7 @@ CTPS.demoApp.generateAccessibleTable = function(crashjson){
 
 	var options = {
 		"divId" : "crashTableDiv",
-		"caption": "Motorized Crash Data over Time: Motorized Vehicles and Truck Injuries and Fatalities from 2010 to 2019",
+		"caption": "Motorized Crash Data over Time: Motorized Vehicles and Truck Injuries and Fatalities from 2011 to 2019",
 	};
 
 	$("#crashTable").accessibleGrid(colDesc, options, crashjson);

@@ -2,7 +2,7 @@
 // Code written by Beatrice Jin, 2016.
 // Contact: beatricezjin@gmail.com
 // Modified by Ben Krepp to reflect change to 97-town MPO.
-// Modified by Ben Krepp to incorporate 2010-2019 data.
+// Modified by Ben Krepp to incorporate 2011-2019 data.
 // Contact: bkrepp@ctps.org
 //
 var CTPS = {};
@@ -21,7 +21,7 @@ var geoPath = d3.geoPath().projection(projection);
 //Using the d3.queue.js library
 d3.queue()
 	.defer(d3.json, "../../data/json/boston_region_mpo_towns_97.topo.json")
-	.defer(d3.csv, "../../data/csv/nonmv_crash_2010_2019.csv")
+	.defer(d3.csv, "../../data/csv/nonmv_crash_2011_2019.csv")
 	.awaitAll(function(error, results){ 
 		CTPS.demoApp.generateMap(results[0],results[1]);
 		CTPS.demoApp.generatePlot(results[1]);
@@ -167,7 +167,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 
 //Assign scales and axes 
 	// var xScale = d3.scaleLinear().domain([2005, 2014]).range([50, 300]);
-	var xScale = d3.scaleLinear().domain([2010, 2019]).range([50, 300]);
+	var xScale = d3.scaleLinear().domain([2011, 2019]).range([50, 300]);
 	var yScale = d3.scaleLinear().domain([0, findTownMax("Total")[0]]).range([400, 20]);
 
 	var xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d3.format("d")); 
@@ -415,7 +415,7 @@ CTPS.demoApp.generateAccessibleTable = function(crashjson){
 
 	var options = {
 		"divId" : "crashTableDiv",
-		"caption": "Nonmotorized Crash Data over Time: Bicycle and Pedestrian Injuries and Fatalities from 2010 to 2019",
+		"caption": "Nonmotorized Crash Data over Time: Bicycle and Pedestrian Injuries and Fatalities from 2011 to 2019",
 	};
 
 	$("#crashTable").accessibleGrid(colDesc, options, crashjson);
