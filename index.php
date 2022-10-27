@@ -137,7 +137,7 @@
 		<div class="page_link"><a href="pages/congestion/index.php" title="Go to Congestion page" id="congestion" >
 			<div class="col-md-12 col-sm-12 nav_metric">
 				<i class="fa fa-circle-o" aria-hidden="true"></i> Congestion </div>
-					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2012; metric used - AM Speed Index">				
+					<div class="col-md-6" data-toggle="tooltip" data-placement="left" title="Year of data: 2019 (expressways) 2015 (arterials); metric used - AM Speed Index">				
 					<p>Congested express highways</p>
 					 	<p class="meter" data-toggle="tooltip" data-placement="top" title="10%"> <span style="width: 10%"></span><!--<b style="left:9%" data-toggle="tooltip" data-placement="top" title="2-year goal: 9%"></b>--></p>	
 					</div>		
