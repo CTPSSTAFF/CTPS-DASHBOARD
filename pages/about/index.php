@@ -87,7 +87,7 @@
 		The RMV collects crash data from the Massachusetts State Police, the police departments of individual cities and towns, 
 		and motor vehicle operators. 
 		The completeness and accuracy of crash data submitted by the police departments of individual cities and towns varies. 
-		Crash data shown in this dashboard is from the years 2005 through 2014, and reflects all recorded crashes involving a motor vehicle.
+		Crash data shown in this dashboard is from the years 2011 through 2019, and reflects all recorded crashes involving a motor vehicle.
 		Nonmotorized crashes reflect any crash involving a motor vehicle or someone walking or riding a bicycle. 
 		</p>
 		
@@ -173,7 +173,8 @@
 		
 		<h2> Congestion </h2>
 		
-		<p>Congestion data are from a 2015 INRIX data set, which the MPO uses to support its Congestion Management Process (CMP). 
+		<p>Congestion data are from a 2019 INRIX data set (for express highways) and a 2015 INRIX data set (for arterial routes),
+		   which the MPO uses to support its Congestion Management Process (CMP). 
 		   These data can be found in the Central Transportation Planning Staff’s data catalogue on the 
 		   Boston Region MPO’s website, <a href="https://bostonmpo.org/data-catalog"  target="_blank">bostonmpo.org/datacatalog</a>. 
 		   Data from the Boston Region MPO area were selected and exported in GeoJSON format. 
