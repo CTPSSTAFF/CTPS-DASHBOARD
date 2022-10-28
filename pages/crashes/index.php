@@ -67,7 +67,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	to monitor the safety of the Boston region’s transportation network, and use this information to prioritize future investments in the system.
 	</p>
 	
-	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2005 to 2014. 
+	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2011 to 2019. 
 	 For more information about these safety performance measures and related data, visit the Crashes section on the About page.
 	</p>
 
@@ -75,9 +75,9 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	
 	<h3>Trends</h3>
 	
-		<p>Click in the map on a city or town, and the number of crashes involving injuries to bicyclists and pedestrians over the last 10 years 
+		<p>Click in the map on a city or town, and the number of crashes involving injuries to bicyclists and pedestrians over the last 9 years 
 		   will appear in the charts to the right. 
-		   Hover over a city or town to see 2014 statistics on total crashes, injuries, and fatalities.
+		   Hover over a city or town to see 2019 statistics on total crashes, injuries, and fatalities.
 		</p>
 	
 		
@@ -87,8 +87,8 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 
 	<h3> One Year of Crashes</h3>
 	
-	<p>During 2014, five people died and 604 were injured while riding bicycles in the Boston region, and 30 pedestrians died
-	   and 1,046 pedestrians were injured while walking on roads in the region. 
+	<p>During 2019, three people died and 540 were injured while riding bicycles in the Boston region, and 30 pedestrians died
+	   and 923 pedestrians were injured while walking on roads in the region. 
 	   Each dot below represents a person walking or bicycling who died or suffered an injury as a result of a motorized crash.
 	</p>
 	

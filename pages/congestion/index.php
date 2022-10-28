@@ -78,7 +78,7 @@
 	   This index compares ideal travel conditions to actual travel conditions. 
 	   Roadway speeds are provided by INRIX, a company that collects vehicle probe data (global positioning systems [GPS] data collected in real-time
 	   from vehicles traveling on roadways).
-	   Congestion data that are on display on this dashboard was collected in 2012. 
+	   Congestion data that are on display on this dashboard was collected in 2019. 
 	   For more information about these data, visit the Congestion section on the About page.
 	</p>
 

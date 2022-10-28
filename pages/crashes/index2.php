@@ -69,7 +69,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	to monitor the safety of the Boston region’s transportation network, and use this information to prioritize future investments in the system.
 	</p>
 	
-	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2005 to 2014. 
+	<p>The visualizations on this page show data from the Massachusetts Crash Data System for the years 2011 to 2019. 
 	 For more information about these safety performance measures and related data, visit the Crashes section on the About page.
 	</p>
 	
@@ -77,8 +77,8 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 	<h3>Trends</h3>
 	
 		<p>Click in the map on a city or town, and the injury and fatality count over time will appear in the charts to the right. 
-		   Hover over a city or town to see 2014 statistics on injuries and fatalities from all crashes involving motorized vehicles. 
-		   Total motorized crashes (including trucks, bicycle, and pedestrian-involved crashes) in 2014 in each city or town are also included as a reference.
+		   Hover over a city or town to see 2019 statistics on injuries and fatalities from all crashes involving motorized vehicles. 
+		   Total motorized crashes (including trucks, bicycle, and pedestrian-involved crashes) in 2019 in each city or town are also included as a reference.
 		</p>
 	
 	<!-- old stuff
@@ -99,7 +99,7 @@ text {fill: #ddd; font-family: "Raleway";}</style>
 		</div>
 
 	<h3>One Year of Crashes</h3>
-	<p> Crashes involving motorized vehicles caused a total of 16,268 injuries and 120 fatalities in the Boston region in 2014.
+	<p> Crashes involving motorized vehicles caused a total of 16,104 injuries and 106 fatalities in the Boston region in 2019.
 	</p>
 
 <!--
