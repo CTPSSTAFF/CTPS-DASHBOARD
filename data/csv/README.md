@@ -11,14 +11,12 @@ bridge_condition_timeline.csv | 2007-2016 bridge condition timeline for 101-town
 bridge_condition_timeline_2.csv | First version of 2007-2016 bridge condition timeline for 97-town MPO. | No longer used. Can be deleted.
 bridge_condition_timeline_3.csv | Second version of 2007-2016 bridge condition timeline for 97-town MPO. | No longer used. Can be deleted.
 bridge_condition_timeline_97towns_v4.csv | Third and FINAL version of 2007-2016 bridge condition timeline for 97-town MPO. | Used in 97-town dashboard.
-bus_route_1.csv | GTFS dump of route and schedule info for MBTA Bus route #1.| __Unsed. Can be deleted.__ |
-CTPS_TOWNS_MAPC_VMT.csv | Table of VMT and emissions data for 101-town MPO. | __Data is out of date. Unused. Can be deleted. |
-equity.csv | Apparently a table of TIP projects in equity regions for 101-town MPO from unspecified date. | __Obsolete. Undocumented. Can be deleted.__|
 interstate_pavement_2015.csv | 2015 interstate pavement condition data | |
 miles_per_town.csv | __UNKNOWN__: Appears to be number of miles of _something_ in each of the towns in the 101-town MPO region, where _something_ might be number of miles of roads, number of miles of bike facilities, number of miles of sidewalks, or something else. | __Undocumented. Unused. Can be deleted.__ |
 motorized_crashes.csv | 2005-2014 motorized crash data for 101-town MPO. |  |
 motorized_crashes_97towns.csv | 2005-2014 motorized crash data for 97-town MPO. | |
-motorized_crashes_fixed.csv | Work-in-progress towards motorized crash data for 97-town MPO. | No longer used. Can be deleted. |
+mv_crash_2011_2019.csv | Motorized crash data for 2011-2019 for 97-town MPO. |  |
+nonmv_crash_2011_2019.csv | Non-motorized crash data for 2011-2019 for 97-town MPO. |  |
 noninterstate_pavement_bins_2014.csv | 2007-2014 interstate pavement condition "bins" for 101-town MPO. | |
 noninterstate_pavement_bins_2014_97towns.csv | 2007-2014 non-interstate pavement condition "bins" for 97-town MPO. | |
 noninterstate_pavement_bins_2015.csv | 2007-2015 non-interstate pavement condition "bins" for 97-town MPO. | |
