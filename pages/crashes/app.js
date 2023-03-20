@@ -10,9 +10,6 @@ CTPS.demoApp = {};
 var f = d3.format(".2")
 var e = d3.format(".1f");
 
-var firstDataYr = 2011, // First and last years of range for which we have data.
-    lastDataYr  = 2019; 
-
 var projection = d3.geoConicConformal()
 	.parallels([41 + 43 / 60, 42 + 41 / 60])
     .rotate([71 + 30 / 60, -41 ])
@@ -61,6 +58,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 
 	var findIndex = function(town, statistic) { 
 		for (var i = 0; i < crashdata.length; i++) { 
+			// Change next line: 2014 --> 2019
 			if (crashdata[i].year == 2019 && crashdata[i].town == town) {
 				return crashdata[i][statistic]; 
 			} 
@@ -168,7 +166,7 @@ CTPS.demoApp.generateMap = function(mpoTowns, crashdata) {
 		.text("Pedestrian Injuries Over Time")
 
 //Assign scales and axes 
-
+	// var xScale = d3.scaleLinear().domain([2005, 2014]).range([50, 300]);
 	var xScale = d3.scaleLinear().domain([2011, 2019]).range([50, 300]);
 	var yScale = d3.scaleLinear().domain([0, findTownMax("Total")[0]]).range([400, 20]);
 
@@ -344,6 +342,7 @@ CTPS.demoApp.generatePlot = function (crashdata) {
 				}});
 
 		town.values.forEach(function(d){
+			// Change: d.year == 2014 to d.year == 2019
 			if (d.year == 2019 && d.town != "Total") { 
 				var x = 1; 
 				var y = yMax - 1; 
