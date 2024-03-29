@@ -1,5 +1,4 @@
 # CTPS Performance Dashboard
-
 This dashboard presents transportation metrics for the Boston Region Metropolitan Planning Organization.
 It was developed by Beatrice Jin during the summer of 2016, and first released in January 2018.
 Beatrice's original GitHub repository for this project may be found [here](https://github.com/bzjin/CTPS-DASHBOARD).
@@ -12,16 +11,42 @@ The changes made since January 2018 do not affect the basic design of the dashbo
 * Migration of the underlying data from an Oracle database to a PostgreSQL database
 * Updates to the underlying data
 
+The contents of this repository are organized as follows:  
+* top-level folder \(this folder\)
+* components - PHP code for top-level navigation, page header and footer
+* data
+  * csv - data files in CSV format read by the dashboard; see its README.md file for a detailed inventory 
+  * json  - data files in JSON format read by the dashboard; see its README.md file for a detailed inventory 
+* js - some JavaScript files used in multiple pages
+* libs - JavaScript library files used by the dashboard
+* pages 
+  * about - subdirectory for PHP code for the dashboard's 'About' page 
+  * bike_facilities - PHP and JavaScript code to generate page and data-vizes for bike data 
+  * bridges - PHP and JavaScript code to generate page and data-vizes for bridge condition data  
+  * congestion - PHP and JavaScript code to generate page and data-vizes for congestion data  
+  * crashes - PHP and JavaScript code to generate page and data-vizes for crash data 
+  * demographics - - PHP and JavaScript code to generate page and data-vizes for demographic data 
+  * pavement - - PHP and JavaScript code to generate page and data-vizes for pavement condition data 
+  * sidewalks - - PHP and JavaScript code to generate page and data-vizes for sidewalk data 
+* tools 
+  * bridge_processing - tools to process the raw bridge data 
+  * congestion_processing - misnamed: contains GeoJSON for 2014 CMP express and arterial routes, with metrics
+  * crashes - empty
+  * interstate_pavement_processing - tools to process pavement condition data for interstates
+  * noninterstate_pavement_processing - tools to process pavement condition data for noninterstates
+  * sidewalk_processing - tools to process sidewalk data
+
 Beatrice's original README.md appears below.
 
--- Benjamin Krepp, 25 January 2021
+-- Benjamin Krepp
+-- Date: 25 January 2021
+-- Updated: 29 March 2024
 
 <hr/>
 <hr/>
 <hr/>
 
 # Beatrice Jin's Original README.md
-
 Every MPO in the US is being required by the Federal Government to define performance metrics and goals for their transportation system, 
 and track progress with respect to those goals over time. 
 This repository holds every commit of the Boston MPO dashboard from July 2016 to its first release in January 2018.
